@@ -78,7 +78,7 @@
                         <tr class="gradeX" th:each="topic:${topicList}">
                             <td th:text="${topic.id}"></td>
                             <td th:text="${topic.title}"></td>
-                            <td th:text="${topic.topicUserId}"></td>
+                            <td th:text="${topic.user.username}"></td>
                             <td th:text="${topic.supportCount}"></td>
                             <td th:text="${topic.commentCount}"></td>
                             <td th:text="${topic.browseCount}"></td>

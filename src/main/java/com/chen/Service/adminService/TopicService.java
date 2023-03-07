@@ -28,6 +28,7 @@ public class TopicService implements TopicMapper{
         List<Topic> topicList = topicMapper.getTopicAddUserList();
         for (Topic topic : topicList) {
             topic.setTagName(tagMapper.getTagNameById(topic.getTopicTagId()));
+
         }
         return topicList;
     }
