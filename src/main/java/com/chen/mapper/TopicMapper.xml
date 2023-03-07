@@ -35,7 +35,7 @@
         select topic.*, user.* from topic, user
         <where>
             <if test="message == 'id'">
-                id = #{selectMessage}
+                topic.id = #{selectMessage}
             </if>
             <if test="message == 'title'">
                 title like concat('%',#{selectMessage},'%')
