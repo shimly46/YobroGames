@@ -20,22 +20,22 @@ public class AppraiseUtil {
 
         if (Objects.nonNull(userLogin)){
             if (s.equals("topic")){
-                // 对所有文章的点赞情况
+                // Appraise list
                 appraiseList = appraiseServise.getAppraiseList(userLogin.getId(), topicId, 1);
 
                 if (Objects.nonNull(appraiseList)){
-                    for (Appraise appraise : appraiseList) {//点赞Map
+                    for (Appraise appraise : appraiseList) {//Appraise Map
                         appraiseMap.put(appraise.getTopicId(), appraise.getStatus());
                     }
                 }
             }
 
             if (s.equals("comment")){
-                // 仅对某篇帖子的评论点赞情况
+                // specific appraise
                 appraiseList = appraiseServise.getAppraiseList(userLogin.getId(), topicId, 0);
 
                 if (Objects.nonNull(appraiseList)){
-                    for (Appraise appraise : appraiseList) {//点赞Map
+                    for (Appraise appraise : appraiseList) {//Appraise Map
                         appraiseMap.put(appraise.getCommentId(), appraise.getStatus());
                     }
                 }

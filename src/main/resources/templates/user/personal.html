@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>WhiteCat</title>
+    <title>Yobro</title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
     <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
@@ -23,7 +23,7 @@
 <div class="blog-body">
     <div class="blog-container">
         <div class="blog-main">
-            <div class="home-tips shadow">主页</div>
+            <div class="home-tips shadow">Home</div>
 
             <div class="blog-main-left animated slideInLeft">
 
@@ -35,8 +35,8 @@
                         </div>
                         <div class="article-right">
                             <div class="article-title">
-                                <span class="article_is_top" th:if="${topic.topicType == 0}">原创</span>&nbsp;
-                                <span class="article_is_yc" th:if="${topic.topicType == 1}">搬运</span>&nbsp;
+                                <span class="article_is_top" th:if="${topic.topicType == 0}">original</span>&nbsp;
+                                <span class="article_is_yc" th:if="${topic.topicType == 1}">carry</span>&nbsp;
                                 <a th:href="@{/detail/} + ${topic.id}" th:text="${topic.title}"></a>
                             </div>
                             <div class="article-abstract">
@@ -53,7 +53,7 @@
                             <button th:onclick="support([[${topic.id}]])" class="article-viewinfo" style="border-style:none; background-color: white" th:if="${appraiseTopicMap[topic.id] == null || appraiseTopicMap[topic.id] == 0}">
                                 <i class="fa fa-thumbs-o-up"   style="color: cornflowerblue" th:text=" ${topic.getSupportCount()}"></i>&nbsp;&nbsp;
                             </button>
-                            <button th:onclick="deleteTopic([[${topic.id}]], [[${topicList.indexOf(topic)}]])" style="border-style:none; background-color: white; color: #1abc9c" th:href="@{/delectTopic/} + ${topic.id}">删除</button>&nbsp;&nbsp;&nbsp;
+                            <button th:onclick="deleteTopic([[${topic.id}]], [[${topicList.indexOf(topic)}]])" style="border-style:none; background-color: white; color: #1abc9c" th:href="@{/delectTopic/} + ${topic.id}">delete</button>&nbsp;&nbsp;&nbsp;
                             <span><i class="fa fa-tag"></i>&nbsp;&nbsp;<a th:href="@{/category/} + ${topic.topicTagId}" th:text="${topic.tagName}"></a></span>
                             <span class="article-viewinfo"><i class="fa fa-eye" th:text="${topic.getBrowseCount()}"></i>&nbsp;</span>
                             <span class="article-viewinfo"><i class="fa fa-commenting" th:text="${topic.commentCount}"></i>&nbsp;</span>
@@ -62,7 +62,7 @@
                     </div>
                     <!--粉丝-->
                     <div class="blog-module shadow animated fadeInRight fadeInUp" th:if="${session.message} == 'fans'">
-                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;我的粉丝</div>
+                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;FansList</div>
                         <ul class="hotusers-list">
                             <li class="hotusers-list-item" th:each="user:${fansList}">
                                 <div class="hotusers-avator">
@@ -78,7 +78,7 @@
                     </div>
                     <!--关注-->
                     <div class="blog-module shadow animated fadeInRight fadeInUp" th:if="${session.message} == 'follow'">
-                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;我的关注</div>
+                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;FollowList</div>
                         <ul class="hotusers-list">
                             <li class="hotusers-list-item" th:each="user:${followList}">
                                 <div class="hotusers-avator">
@@ -170,19 +170,19 @@
                         <img th:src="@{/images/avatar/} + ${session.loginUser.avatar}" alt="头像">
                     </div>
                     <p class="blogerinfo-nickname" th:text="${session.loginUser.username}"></p>
-                    <div class="blogerinfo-introduce" th:utext="文章数 + ':' + ${session.loginUser.topicCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + 获赞数 + ':' + ${session.loginUser.supportCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + 浏览量 + ':' + ${session.loginUser.browseCount}"> </div>
+                    <div class="blogerinfo-introduce" th:utext="articleNum + ':' + ${session.loginUser.topicCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + LikesNum + ':' + ${session.loginUser.supportCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + View + ':' + ${session.loginUser.browseCount}"> </div>
                     <div class="blogerinfo-location">
-                        <a th:href="@{toPersonal/topic}"><i class="fa fa-location-arrow"></i>&nbsp;<span>我的文章</span></a>
-                        <a th:href="@{toPersonal/follow}"><i class="fa fa-location-arrow"></i>&nbsp;<span>我的关注</span></a>
-                        <a th:href="@{toPersonal/fans}"><i class="fa fa-location-arrow"></i>&nbsp;<span>我的粉丝</span></a>
+                        <a th:href="@{toPersonal/topic}"><i class="fa fa-location-arrow"></i>&nbsp;<span>article</span></a>
+                        <a th:href="@{toPersonal/follow}"><i class="fa fa-location-arrow"></i>&nbsp;<span>attention</span></a>
+                        <a th:href="@{toPersonal/fans}"><i class="fa fa-location-arrow"></i>&nbsp;<span>fans</span></a>
                     </div>
                     <hr>
                     <div class="blogerinfo-contact">
                         <!--<a target="_blank" id="QQjl" title="QQ交流" href="http://shang.qq.com/email/stop/email_stop.html?qq=2896543728"><i class="fa fa-qq fa-2x"></i></a>-->
-                        <span style="color: #0e8c8c;  font-size:16px" th:text="'未读' + ${totalMessage}"></span>
-                        <a target="_blank" id="gwxx" title="消息" th:href="@{/toPersonal/support}"><i class="fa fa-envelope fa-2x"></i></a>
+                        <span style="color: #0e8c8c;  font-size:16px" th:text="'Unread' + ${totalMessage}"></span>
+                        <a target="_blank" id="gwxx" title="news" th:href="@{/toPersonal/support}"><i class="fa fa-envelope fa-2x"></i></a>
                         <!--<a target="_blank" id="xlwb" title="新浪微博" href="https://weibo.com/p/1005055534423586"><i class="fa fa-weibo fa-2x"></i></a>-->
-                        <a target="_blank" id="htgl" title="设置" th:href="@{/setUp}"><i class="fa fa-database fa-2x"></i></a>
+                        <a target="_blank" id="htgl" title="setUp" th:href="@{/setUp}"><i class="fa fa-database fa-2x"></i></a>
                     </div>
                 </div>
             </div>

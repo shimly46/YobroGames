@@ -21,31 +21,31 @@ import java.util.Objects;
 @NoArgsConstructor
 public class CutPage {
 
-    //默认
+    //fault
     public final static int EVERYPAGECOUNT = 5;
 
-    //每页记录数
+    //Records per page
     private int everyPageCount = EVERYPAGECOUNT;
 
-    //总记录数
+    //total records
     private int totalCount;
 
-    //当前页
+    //this page
     private int nowPage = 1;
 
-    //上一页
+    //previous one
     private int lastPage;
 
-    //下一页
+    //next one
     private int nextPage;
 
-    //当前页的第一条记录的位次
+    //The position of the first record in the current page
     private int nowFirst;
 
-    //当前页的最后一条记录的位次
+    //The position of the last record in the current page
     private int nowLast;
 
-    //页数
+    //page count
     private int PageCount;
 
     public CutPage(int everyPageCount) {
@@ -82,7 +82,7 @@ public class CutPage {
         return getTotalCount() / everyPageCount + 1;
     }
 
-    // 分页判断
+    // page justify
     public List getLimitList(List List){
         List alist;
         if (this.getNowLast() >= List.size()){
@@ -103,7 +103,7 @@ public class CutPage {
         return alist;
     }
 
-    /*为后面进来的用户分配一个cutPage*/
+    /*Assign a cutPage to users coming in later*/
     public void putPageInMap(HashMap<Integer, CutPage> cutPageMap, User loginUser, TopicService topicService){
 
         int id = loginUser.getId();

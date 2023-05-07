@@ -1,4 +1,4 @@
-#修改classpath
+#correct classpath
 server:
   port: 8080
   servlet:
@@ -8,13 +8,13 @@ spring:
   mvc:
     hiddenmethod:
       filter:
-        enabled: true   #开启页面表单的Rest功能
+        enabled: true   #Enable Rest functionality for the page form
   datasource:
     username: root
-    password: qazchenxijie
+    password: 123456
     url: jdbc:mysql://localhost:3306/myblog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource # 自定义数据源
+    type: com.alibaba.druid.pool.DruidDataSource
     hikari:
       auto-commit: false
   servlet:
@@ -37,18 +37,15 @@ spring:
 mybatis:
   type-aliases-package: com.chen.pojo
   configuration:
-    #下划线转驼峰
+    #111
     map-underscore-to-camel-case: true
 
-# 日志
-#logging:
-#  level:
-#    com.chen.mapper: debug  # 包名根据自己的包名来
+
 
 index:
   static:
     properties:
-      myEmail: 1345305701@qq.com #我的邮箱
+      myEmail: 506337889@qq.com #我的邮箱
       everyPageTopicCount: 5 # 首页每页的topic数量
       topicRankCount: 10      # topic热度排行的数量
       topicNearCount: 10      # topic最新发布榜的数量

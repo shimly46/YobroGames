@@ -1,16 +1,5 @@
-/*.ht-box {
-    display: inline-block;
-    margin: 15px;
-    padding: 15px 0;
-    color: #fff;
-    width: 12%;
-}
 
-.ht-box p:first-child {
-    font-size: 40px;
-}
-*/
-/*原创认证*/
+/*Original certification*/
 .article_is_yc {
     font-size: 12px;
     display: inline-block;
@@ -22,7 +11,7 @@
     position: inherit;
 }
 
-/*置顶认证*/
+/*Top placement certification*/
 .article_is_top {
     font-size: 12px;
     display: inline-block;
@@ -34,7 +23,7 @@
     position: inherit;
 }
 
-/*转载认证*/
+/*Authentication of reproduction*/
 .article_is_zz {
  font-size: 12px;
  display: inline-block;
@@ -46,7 +35,7 @@
  position: inherit;
 }
 
-/*博主认证*/
+/*Blogger authentication*/
 .is_bloger {
  font-size: 12px;
  display: inline-block;

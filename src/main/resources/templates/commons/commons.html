@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Yobro</title>
 </head>
 <body>
 
@@ -14,35 +14,35 @@
             <i class="fa fa-qq"></i>
         </a>-->
 
-        <a class="blog-logo" style="transform:translate(-120px)" th:href="@{/userIndex.html}">WhiteCat</a>
+        <a class="blog-logo" style="transform:translate(-100px)" th:href="@{/userIndex.html}">Yobro</a>
 
         <ul class="layui-nav" lay-filter="nav">
             <li class="layui-nav-item">
-                <a th:href="@{/toUserIndex}"><i class="fa fa-home fa-fw"></i>&nbsp;网站首页</a>
+                <a th:href="@{/toUserIndex}"><i class="fa fa-home fa-fw"></i>&nbsp;Home</a>
             </li>
             <li class="layui-nav-item">
-                <a th:href="@{/toArticle}"><i class="fa fa-file-text fa-fw"></i>&nbsp;文章专栏</a>
+                <a th:href="@{/toArticle}"><i class="fa fa-file-text fa-fw"></i>&nbsp;Article</a>
             </li>
             <li class="layui-nav-item">
-                <a th:href="@{/toUserPage}"><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;用户专栏</a>
+                <a th:href="@{/toUserPage}"><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;Users</a>
             </li>
             <li class="layui-nav-item">
-                <a th:href="@{/code.html}"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;源码地址</a>
+                <a th:href="@{/toGameLib}"><i class="fa fa-hourglass-half fa-fw"></i>&nbsp;Game Library</a>
             </li>
             <li class="layui-nav-item">
-                <a th:href="@{/contactMe}"><i class="fa fa-info fa-fw"></i>&nbsp;联系我</a>
+                <a th:href="@{/contactMe}"><i class="fa fa-info fa-fw"></i>&nbsp;Contact me</a>
             </li>
             <!--<span class="layui-nav-bar"></span></ul>-->
             <li class="layui-nav-item">
                 <form method="get" th:action="@{/article/selectSubmit}">
                     <div class="layui-inline layui-show-xs-block">
-                        <input th:value="${session.selectMessage}" required="required" type="text" name="selectMessage"  placeholder="请输入搜索关键词" autocomplete="off" class="layui-input">
+                        <input th:value="${session.selectMessage}" required="required" type="text" name="selectMessage"  placeholder="Please enter keywords" autocomplete="off" class="layui-input">
                     </div>
                     <button type="submit" class="layui-btn" style="background-color: #3F3F3F"><i class="layui-icon">&#xe615;</i></button>
                 </form>
             </li>
             <li class="layui-nav-item" style="transform:translate(150px)">
-                <a th:href="@{/write.html}"><i class="fa fa-info fa-fw" ></i>&nbsp;发布</a>
+                <a th:href="@{/write.html}"><i class="fa fa-info fa-fw" ></i>&nbsp;publish</a>
             </li>
             <!--<li class="layui-nav-item" style="transform:translate(180px)">
             <div th:if="${session.loginUser == null}">
@@ -63,12 +63,12 @@
                 </div>
                 <div th:if="${session.loginUser == null}">
                     <a class="layui-nav-item" style="transform:translate(680px) translateY(-65px)">
-                        <a th:href="@{/login.html}" ><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;登录</a>
+                        <a th:href="@{/login.html}" ><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;Log</a>
                     </a>
                 </div>
             </li>
             <li class="layui-nav-item" style="transform:translate(680px) translateY(-65px)">
-                <a th:href="@{/loginOut}" th:if="${session.loginUser != null}"><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;登出</a>
+                <a th:href="@{/loginOut}" th:if="${session.loginUser != null}"><i class="fa fa-paper-plane-o fa-fw"></i>&nbsp;Logout</a>
             </li>
         </ul>
     </div>
@@ -77,9 +77,9 @@
 <!--页脚-->
 <footer id="f" class="blog-footer" th:fragment="down">
     <p><span>Copyright</span><span>©</span><span>2022</span>
-        <a href="">WhiteCat博客论坛</a><span>Design By WhileCat</span></p>
+        <a href="">Yobro Game Forum</a><span>Design By RUI.L</span></p>
     <p>
-        <a href="" target="_blank">备号</a>
+        <a href="" target="_blank">Reserve number</a>
     </p>
 </footer>
 

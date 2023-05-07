@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>WhiteCat</title>
+    <title>Yobro</title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
     <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
@@ -35,8 +35,8 @@
                         </div>
                         <div class="article-right">
                             <div class="article-title">
-                                <span class="article_is_top" th:if="${topic.topicType == 0}">原创</span>&nbsp;
-                                <span class="article_is_yc" th:if="${topic.topicType == 1}">搬运</span>&nbsp;
+                                <span class="article_is_top" th:if="${topic.topicType == 0}">original</span>&nbsp;
+                                <span class="article_is_yc" th:if="${topic.topicType == 1}">carry</span>&nbsp;
                                 <a th:href="@{/detail/} + ${topic.id}" th:text="${topic.title}"></a>
                             </div>
                             <div class="article-abstract">
@@ -60,7 +60,7 @@
                     </div>
                     <!--粉丝-->
                     <div class="blog-module shadow animated fadeInRight fadeInUp" th:if="${session.otherMessage} == 'fans'">
-                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;我的粉丝</div>
+                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;Fans</div>
                         <ul class="hotusers-list">
                             <li class="hotusers-list-item" th:each="user:${fansList}">
                                 <div class="hotusers-avator">
@@ -120,15 +120,15 @@
                         <img th:src="@{/images/avatar/} + ${session.user.avatar}" alt="头像">
                     </div>
                     <p class="blogerinfo-nickname" th:text="${session.user.username}"></p>
-                    <div class="blogerinfo-introduce" th:utext="文章数 + ':' + ${session.user.topicCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + 获赞数 + ':' + ${session.user.supportCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + 浏览量 + ':' + ${session.user.browseCount}"> </div>
-                    <a th:href="@{toOtherPersonalPrivate/topic}">&nbsp;&nbsp;<i class="fa fa-location-arrow"></i>&nbsp;<span>他的文章</span></a>
-                    <button style="border-style:none; background-color: white" onclick="toOtherPersonalPrivate(1)" th:href="@{toOtherPersonalPrivate/follow}">&nbsp;&nbsp;<i class="fa fa-location-arrow"></i>&nbsp;<span>他的关注</span></button>
-                    <button style="border-style:none; background-color: white" onclick="toOtherPersonalPrivate(2)" th:href="@{toOtherPersonalPrivate/fans}">&nbsp;&nbsp;<i class="fa fa-location-arrow"></i>&nbsp;<span>他的粉丝</span></button>
+                    <div class="blogerinfo-introduce" th:utext="articleNum + ':' + ${session.user.topicCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + LikesNum + ':' + ${session.user.supportCount} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + View + ':' + ${session.user.browseCount}"> </div>
+                    <a th:href="@{toOtherPersonalPrivate/topic}">&nbsp;&nbsp;<i class="fa fa-location-arrow"></i>&nbsp;<span>article</span></a>
+                    <button style="border-style:none; background-color: white" onclick="toOtherPersonalPrivate(1)" th:href="@{toOtherPersonalPrivate/follow}">&nbsp;&nbsp;<i class="fa fa-location-arrow"></i>&nbsp;<span>FollowList</span></button>
+                    <button style="border-style:none; background-color: white" onclick="toOtherPersonalPrivate(2)" th:href="@{toOtherPersonalPrivate/fans}">&nbsp;&nbsp;<i class="fa fa-location-arrow"></i>&nbsp;<span>FansList</span></button>
                     <hr>
                     <div class="blogerinfo-contact">
-                        <a class="blogerinfo-location" th:href="@{/chat/} + ${session.user.id}"><i class="fa fa-location-arrow"></i>&nbsp;<span>私信</span></a>
-                        <a class="blogerinfo-location" th:href="@{/beFans/} + ${session.user.id}" th:if="${session.ifFans == false}"><i class="fa fa-location-arrow"></i>&nbsp;<span>关注</span></a>
-                        <a class="blogerinfo-location" th:href="@{/everBeFans/} + ${session.user.id}" th:if="${session.ifFans == true}"><i class="fa fa-location-arrow"></i>&nbsp;<span>取消关注</span></a >
+                        <a class="blogerinfo-location" th:href="@{/chat/} + ${session.user.id}"><i class="fa fa-location-arrow"></i>&nbsp;<span>private letter</span></a>
+                        <a class="blogerinfo-location" th:href="@{/beFans/} + ${session.user.id}" th:if="${session.ifFans == false}"><i class="fa fa-location-arrow"></i>&nbsp;<span>Follow</span></a>
+                        <a class="blogerinfo-location" th:href="@{/everBeFans/} + ${session.user.id}" th:if="${session.ifFans == true}"><i class="fa fa-location-arrow"></i>&nbsp;<span>Cancel Follow</span></a >
                     </div>
                 </div>
             </div>

@@ -92,7 +92,7 @@ public class UserController {
 
     @GetMapping("/lastPage")
     public String lastPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // Updated cutPage without requiring a new session, as the session is a live reference and the model is equal to request.
         if(cutPage.getNowPage() != 1){
             cutPage.setNowPage(cutPage.getNowPage() - 1);
         }
@@ -104,7 +104,7 @@ public class UserController {
 
     @GetMapping("/toWhichPage/{page}")
     public String toWhichPage(@PathVariable("page") Integer page, Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // Modifying cutPage does not require re-passing the session as the session is a reference to a memory address and updates in real-time. The model is equivalent to the request.
         if (page > cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getPageCount());
         } else {
@@ -156,12 +156,12 @@ public class UserController {
     @ResponseBody
     public String usernameCheck(String username){
         if(!StringUtils.hasText(username)){
-            return "用户名不能为空！";
+            return "Username cannot be Null！";
         } else {
             if (username.length() < 3){
-                return "用户名长度不能小于3！";
+                return "Username must be at least 3 characters long！";
             }else if (username.length() > 10){
-                return "用户名长度不能大于10！";
+                return "Username must be at most 10 characters long！";
             }
             else {
                 return "ok";
@@ -173,10 +173,10 @@ public class UserController {
     @ResponseBody
     public String passwordCheck(String password){
         if(!StringUtils.hasText(password)){
-            return "密码不能为空！";
+            return "Password cannot be Null！";
         } else {
             if (password.length() < 6){
-                return "密码长度必须6至12位！";
+                return "Length of password must within 6 and 12！";
             } else {
                 return "ok";
             }
@@ -189,7 +189,7 @@ public class UserController {
         if(password.equals(rePassword)){
             return "ok";
         } else {
-            return "两次密码不一致！";
+            return "Password is not the same！";
         }
     }
 
@@ -199,7 +199,7 @@ public class UserController {
         if (email.matches("^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$")) {
             return "ok";
         } else {
-            return "邮箱格式不正确!";
+            return "E-mail Error!";
         }
     }
 
@@ -211,12 +211,12 @@ public class UserController {
     @PostMapping("/submitAdd")
     @ResponseBody
     public String submitAdd(User user, String rePassword){
-        //后端再次判断
+        //justify again!!
         if (CheckUtil.check(user.getUsername(), user.getPassword(), rePassword, user.getEmail())){
             userService.insertUser(user);
-            return "添加成功！";
+            return "add success！";
         } else {
-            return "数据不符合格式，添加失败！";
+            return "data cannot match ,add failed!";
         }
 
     }

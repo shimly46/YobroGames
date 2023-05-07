@@ -45,7 +45,7 @@ public class FansService implements FansMapper{
         return fansMapper.ifEverFans(fans);
     }
 
-    //beFans分为firstBeFans和againBeFans
+    //beFans are divided into firstBeFans and againBeFans
     @Override
     public void beFans(Fans fans) {
 

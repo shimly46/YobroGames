@@ -16,7 +16,7 @@
     </properties>
 
     <dependencies>
-        <!--“Spring Boot配置注解执行器-->
+        <!--“Spring Boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -103,6 +103,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/**</include>
+                    <include>static/**</include>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                     <include>**/*.css</include>

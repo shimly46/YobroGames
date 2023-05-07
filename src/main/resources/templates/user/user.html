@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>WhiteCat</title>
+    <title>Yobro</title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
     <link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
@@ -23,11 +23,11 @@
 <div class="blog-body">
     <div class="blog-container">
         <div class="blog-main">
-            <div class="home-tips shadow">主页</div>
+            <div class="home-tips shadow">Home</div>
 
             <div class="layui-form-item">
                 <div class="search-keywords  shadow">
-                    <input type="text" id="nameMessage" name="keywords" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
+                    <input type="text" id="nameMessage" name="keywords" lay-verify="required" placeholder="Enter keyword search" autocomplete="off" class="layui-input">
                     <button class="layui-btn" onclick="selectName()"><i class="fa fa-search"></i></button>
                 </div>
 
@@ -36,7 +36,7 @@
 
                 <div class="flow-default" id="parentArticleList">
                     <div class="blog-module shadow animated fadeInRight fadeInUp">
-                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;用户列表</div>
+                        <div class="blog-module-title"><i class="layui-icon"></i>&nbsp;User List</div>
                         <ul class="hotusers-list">
                             <li class="hotusers-list-item" th:each="user:${userList}">
                                 <div class="hotusers-avator">

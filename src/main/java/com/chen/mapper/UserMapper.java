@@ -14,7 +14,7 @@ import sun.awt.image.IntegerInterleavedRaster;
 import java.util.List;
 import java.util.Map;
 
-//记得@mapper
+
 @Repository
 @Mapper
 public interface UserMapper {

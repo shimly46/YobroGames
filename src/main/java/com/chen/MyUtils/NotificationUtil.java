@@ -25,8 +25,8 @@ public class NotificationUtil extends Notification {
     private int toId;
     private String fromName;
     private String toName;
-    private String title;  //消息的title
-    private String content; //消息的内容
+    private String title;  //message title
+    private String content; //message content
     private Date time;
     private int topicId;
     private int commentId;
@@ -72,43 +72,43 @@ public class NotificationUtil extends Notification {
         if (fromId != 0){
             this.setFromName(userService.getUserById(fromId).getUsername());
         } else {
-            this.setFromName("游客");
+            this.setFromName("Tourists");
         }
         this.setToName(userService.getUserById(toId).getUsername());
         this.setTime(new Date());
         this.setSubject(4);
-        this.setContent("<span style=\"color: #0e8c8c\">" + fromName + "</span>" + "给你发来一条私信");
+        this.setContent("<span style=\"color: #0e8c8c\">" + fromName + "</span>" + "send you an message");
     }
 
-    /*文章点赞*/
+    /*note for appraise*/
     public NotificationUtil supportTopic(){
         this.setSubject(2);
-        this.setTitle("帖子点赞通知");
-        this.setContent(fromName + "于" + time.toString() + "点赞了你的文章‘<span style=\"color: #0e8c8c\">" + topicTitle + "</span>‘");
+        this.setTitle("note for appraise");
+        this.setContent(fromName + "at" + time.toString() + "appraise you‘<span style=\"color: #0e8c8c\">" + topicTitle + "</span>‘");
         return this;
     }
 
-    /*取消文章点赞*/
+    /*note for cancel*/
     public NotificationUtil cancelSupportTopic(){
         this.setSubject(2);
-        this.setTitle("帖子取消点赞通知");
-        this.setContent(fromName + "于" + time + "取消了对你文章’<span style=\"color: #0e8c8c\">" + topicTitle + "</span>’的点赞");
+        this.setTitle("note for cancel");
+        this.setContent(fromName + "at" + time + "cancel your appraise ’<span style=\"color: #0e8c8c\">" + topicTitle + "</span>’");
         return this;
     }
 
-    /*评论点赞*/
+    /*note for comment*/
     public NotificationUtil supportComment(){
         this.setSubject(2);
-        this.setTitle("评论点赞通知");
-        this.setContent(fromName + "于" + time.toString() + "点赞了你在文章'" + topicTitle + "'下发表的评论：‘<span style=\"color: #0e8c8c\">" + commentContent + "</span>’");
+        this.setTitle("note for comment");
+        this.setContent(fromName + "at" + time.toString() + "your appraising topic'" + topicTitle + "'make a comment：‘<span style=\"color: #0e8c8c\">" + commentContent + "</span>’");
         return this;
     }
 
-    /*取消评论点赞*/
+    /*note for cancel*/
     public NotificationUtil cancelSupportComment(){
         this.setSubject(2);
-        this.setTitle("评论取消点赞通知");
-        this.setContent(fromName + "于" + time + "取消了你在文章'" + topicTitle + "'下发表的评论：‘<span style=\"color: #0e8c8c\">" + commentContent + "</span>‘的点赞");
+        this.setTitle("note for cancel!");
+        this.setContent(fromName + "at" + time + "cancelling appraising topic'" + topicTitle + "'in the comment：‘<span style=\"color: #0e8c8c\">" + commentContent + "</span>‘");
         return this;
     }
 

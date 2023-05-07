@@ -1,8 +1,8 @@
-# 默认忽略的文件
+# Files ignored by default
 /shelf/
 /workspace.xml
-# 数据源本地存储已忽略文件
+# Data source local storage has ignored files
 /../../../../:\github\layui\.idea/dataSources/
 /dataSources.local.xml
-# 基于编辑器的 HTTP 客户端请求
+# Editor-based HTTP client request
 /httpRequests/

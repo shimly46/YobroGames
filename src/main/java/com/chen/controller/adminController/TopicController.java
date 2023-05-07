@@ -35,21 +35,21 @@ public class TopicController {
 
     @GetMapping("/topicList")
     public String topicList(Model model){
-        // 分页信息
+        // page ins
         cutPage.setNowPage(1);
-        // 将展示数量恢复
+        // recover
         cutPage.setEveryPageCount(CutPage.EVERYPAGECOUNT);
-        // 用户总量
+        // user total
         cutPage.setTotalCount(topicService.getTotalTopicCount());
 
-        // 搜索框为空
+        // Search null first
         select.setSelectMessage("");
-        // 将展示数量恢复
+        // recover
         select.setShowCount(CutPage.EVERYPAGECOUNT);
-        // 分页展示判断
+        // paging justify
         topicList = topicService.getTopicList();
         model.addAttribute("topicList", cutPage.getLimitList(topicList));
-        // 更新要展示的list
+        // update list
         model.addAttribute("cutPage", cutPage);
         model.addAttribute("select", select);
 
@@ -57,10 +57,10 @@ public class TopicController {
     }
 
 
-    //将本类中的cutPage的nowPage++后重定向
+    //Redirect the cutPage in this class after nowPage++
     @GetMapping("/nextPage")
     public String nextPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // If selectMessage is not empty, it is a normal search; if it is empty, it is either an empty search or a nextPage redirect back
         if (cutPage.getNowPage() != cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getNowPage() + 1);
         }
@@ -71,17 +71,17 @@ public class TopicController {
     }
 
     @GetMapping("/selectSubmit")
-    // selectMessage不为空，则是正常搜索，为空则是空搜索或者是nextPage重定向回来
+    // If "selectMessage" has a value, it's a regular search, otherwise it's either an empty search or a redirected "nextPage".
     public String selectSubmit(Select viewSelect, Model model){
-        // 直接select = viewSelect会将showCount归0
+
         int showCount = select.getShowCount();
         select = viewSelect;
         select.setShowCount(showCount);
-        // 每次搜索前将页码回调成1，避免List溢出
+        // Set page number to 1 before each search to prevent list overflow.
         cutPage.setNowPage(1);
-        // 设置搜索后的总页数
+        // Display total number of pages after search.
         cutPage.setTotalCount(topicService.getTopicByWhichCount(select));
-        // 更新要展示的list
+        // display updated list
         //topicList = topicService.getTopicByWhich(select);
         topicList = topicService.getTopicAndUserByWhich(select);
 
@@ -94,7 +94,7 @@ public class TopicController {
 
     @GetMapping("/lastPage")
     public String lastPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // If selectMessage is not empty, it is a normal search; if it is empty, it is either an empty search or a nextPage redirect back
         if(cutPage.getNowPage() != 1){
             cutPage.setNowPage(cutPage.getNowPage() - 1);
         }
@@ -106,7 +106,7 @@ public class TopicController {
 
     @GetMapping("/toWhichPage/{page}")
     public String toWhichPage(@PathVariable("page") Integer page, Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // If selectMessage is not empty, it is a normal search; if it is empty, it is either an empty search or a nextPage redirect back
         if (page > cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getPageCount());
         } else {

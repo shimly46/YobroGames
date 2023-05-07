@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : alaions
+ Source Server         : 本地数据库
  Source Server Type    : MySQL
- Source Server Version : 80019
+ Source Server Version : 50723
  Source Host           : localhost:3306
  Source Schema         : myblog
 
  Target Server Type    : MySQL
- Target Server Version : 80019
- File Encoding         : 65001
+ Target Server Version : 50723
+ File Encoding         : 65001sys_config
 
- Date: 06/03/2023 16:42:23
+ Date: 21/04/2023 20:06:14
 */
 
 SET NAMES utf8mb4;
@@ -22,14 +22,14 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `appraise`;
 CREATE TABLE `appraise`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL COMMENT 'Whose',
-  `topic_id` int NOT NULL COMMENT 'topic id',
-  `type` int NOT NULL DEFAULT 0 COMMENT '1:to topic    0：to comment',
-  `comment_id` int NOT NULL DEFAULT 0 COMMENT 'comment id，0 if it is an default action on a post.',
-  `status` int NOT NULL DEFAULT 1 COMMENT '1: in this state, 0: cancelled the state, such as cancelled like',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '来自谁的',
+  `topic_id` int(11) NOT NULL COMMENT '帖子的id',
+  `type` int(11) NOT NULL DEFAULT 0 COMMENT '1:对帖子    0：对帖子里的评论',
+  `comment_id` int(11) NOT NULL DEFAULT 0 COMMENT '评论的id，如果是对帖子的操作则为0，默认为0',
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1:处于此状态，0:取消了该状态，如取消点赞',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 181 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 183 CHitemiditem_nameARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of appraise
@@ -120,7 +120,7 @@ INSERT INTO `appraise` VALUES (165, 6, 58, 1, 0, 0);
 INSERT INTO `appraise` VALUES (166, 6, 71, 1, 0, 1);
 INSERT INTO `appraise` VALUES (167, 99, 58, 1, 0, 1);
 INSERT INTO `appraise` VALUES (168, 99, 70, 1, 0, 1);
-INSERT INTO `appraise` VALUES (169, 1, 76, 1, 0, 1);
+INSERT INTO `appraise` VALUES (169, 1, 76, 1, 0, 0);
 INSERT INTO `appraise` VALUES (170, 1, 78, 1, 0, 1);
 INSERT INTO `appraise` VALUES (171, 1, 76, 0, 80, 0);
 INSERT INTO `appraise` VALUES (172, 99, 76, 1, 0, 0);
@@ -132,19 +132,21 @@ INSERT INTO `appraise` VALUES (177, 99, 80, 1, 0, 1);
 INSERT INTO `appraise` VALUES (178, 99, 87, 1, 0, 1);
 INSERT INTO `appraise` VALUES (179, 99, 88, 1, 0, 1);
 INSERT INTO `appraise` VALUES (180, 99, 81, 1, 0, 1);
+INSERT INTO `appraise` VALUES (181, 1, 87, 1, 0, 0);
+INSERT INTO `appraise` VALUES (182, 7, 87, 1, 0, 0);
 
 -- ----------------------------
 -- Table structure for ban
 -- ----------------------------
 DROP TABLE IF EXISTS `ban`;
 CREATE TABLE `ban`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `date_from` date NULL DEFAULT NULL COMMENT 'time for banning',
-  `date_to` date NULL DEFAULT NULL COMMENT 'time for cancelling',
-  `reason` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'ban reason',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `date_from` date NULL DEFAULT NULL COMMENT '封禁开始时间',
+  `date_to` date NULL DEFAULT NULL COMMENT '封禁结束时间',
+  `reason` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '封禁原因',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ban
@@ -155,18 +157,18 @@ CREATE TABLE `ban`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '内容',
-  `comment_user_id` int NOT NULL COMMENT '发评论的用户ID',
-  `comment_topic_id` int NOT NULL COMMENT '评论所属帖子ID',
+  `comment_user_id` int(11) NOT NULL COMMENT '发评论的用户ID',
+  `comment_topic_id` int(11) NOT NULL COMMENT '评论所属帖子ID',
   `comment_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
-  `floor` int NULL DEFAULT NULL COMMENT '主楼层',
-  `reply` int NOT NULL DEFAULT 0 COMMENT '回复其他用户的用户ID，若只是对帖子评论则为0',
-  `child_floor` int NOT NULL DEFAULT 0 COMMENT '子楼层',
-  `support_count` int NOT NULL DEFAULT 0 COMMENT '获得点赞数',
-  `criticism_count` int NOT NULL DEFAULT 0 COMMENT '踩',
+  `floor` int(11) NULL DEFAULT NULL COMMENT '主楼层',
+  `reply` int(11) NOT NULL DEFAULT 0 COMMENT '回复其他用户的用户ID，若只是对帖子评论则为0',
+  `child_floor` int(11) NOT NULL DEFAULT 0 COMMENT '子楼层',
+  `support_count` int(11) NOT NULL DEFAULT 0 COMMENT '获得点赞数',
+  `criticism_count` int(11) NOT NULL DEFAULT 0 COMMENT '踩',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of comment
@@ -237,16 +239,19 @@ INSERT INTO `comment` VALUES (87, '1234', 1, 78, '2022-11-24 11:24:39', 2, 0, 0,
 INSERT INTO `comment` VALUES (88, 'qwerty', 1, 79, '2022-11-24 12:32:00', 3, 0, 0, 0, 0);
 INSERT INTO `comment` VALUES (89, 'qweqwe', 1, 79, '2022-11-24 12:32:07', 2, 99, 1, 0, 0);
 INSERT INTO `comment` VALUES (90, 'qwe', 99, 76, '2022-11-26 08:06:58', 3, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (91, 'sssssssssss', 1, 76, '2023-04-10 10:01:59', 1, 1, 1, 0, 0);
+INSERT INTO `comment` VALUES (92, 'fucking days', 1, 76, '2023-04-10 10:09:28', 4, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (93, 'sssssssss', 1, 87, '2023-04-11 05:11:07', 1, 0, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for fans
 -- ----------------------------
 DROP TABLE IF EXISTS `fans`;
 CREATE TABLE `fans`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL COMMENT '偶像',
-  `fans_id` int NOT NULL COMMENT '粉丝',
-  `status` int NOT NULL DEFAULT 1 COMMENT '状态，1为关注，0为取消关注',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '偶像',
+  `fans_id` int(11) NOT NULL COMMENT '粉丝',
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '状态，1为关注，0为取消关注',
   `creat_time` datetime NULL DEFAULT NULL COMMENT '第一次成为粉丝的时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '状态改变的时间，取消/再次关注',
   PRIMARY KEY (`id`) USING BTREE
@@ -274,15 +279,41 @@ INSERT INTO `fans` VALUES (28, 6, 99, 1, '2022-11-23 17:44:28', '2022-11-23 18:0
 INSERT INTO `fans` VALUES (29, 99, 1, 1, '2022-11-24 12:33:51', '2022-11-24 12:33:51');
 
 -- ----------------------------
+-- Table structure for games
+-- ----------------------------
+DROP TABLE IF EXISTS `games`;
+CREATE TABLE `games`  (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '游戏名称',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '游戏描述',
+  `genres` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '游戏种类',
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '游戏封面url',
+  `comment_count` int(11) NULL DEFAULT NULL COMMENT '评论数',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_user_id` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `browse_count` int(11) NULL DEFAULT NULL COMMENT '浏览量',
+  `support_count` int(11) NULL DEFAULT NULL COMMENT '点赞数',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of games
+-- ----------------------------
+INSERT INTO `games` VALUES (1, 'Glory of Kings', 'King of Glory is a 5V5 combat game', '0', 'wangzherongyao.jpg', 1, '2023-04-11 00:00:00', 1, 5, 0);
+INSERT INTO `games` VALUES (2, 'League of Legends(LOL)', 'League of Legends(LOL) is a 5V5 combat game', '0', 'LOL.jpg', 0, '2023-04-11 00:00:00', 1, 5, 0);
+INSERT INTO `games` VALUES (3, 'Game for Peace', 'Peace Elite is a survival gunfight game', '0', 'hepingjingying.jpg', 0, '2023-04-11 00:00:00', 1, 5, 0);
+INSERT INTO `games` VALUES (4, 'Cross Fire(CF)', 'Crossing the Fire Line is an FPS shooting game', '0', 'CF.JPG', 0, '2023-04-11 00:00:00', 1, 5, 0);
+
+-- ----------------------------
 -- Table structure for ip
 -- ----------------------------
 DROP TABLE IF EXISTS `ip`;
 CREATE TABLE `ip`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of ip
@@ -294,18 +325,18 @@ INSERT INTO `ip` VALUES (43, '0:0:0:0:0:0:0:1', '2023-02-06 08:36:21');
 -- ----------------------------
 DROP TABLE IF EXISTS `notification`;
 CREATE TABLE `notification`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `from_id` int NOT NULL COMMENT 'sender',
-  `to_id` int NOT NULL COMMENT 'receiver',
-  `subject` int NOT NULL COMMENT '0：sys note，1：comment，2：appraise ，3：new fans，4：p_letter',
-  `status` int NOT NULL DEFAULT 0 COMMENT 'read or not,1:yes，0：no\r\n',
-  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'title\r\n',
-  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'content',
-  `time` datetime NOT NULL COMMENT 'time',
-  `topic_id` int NOT NULL DEFAULT 0 COMMENT 'appraised id',
-  `comment_id` int NOT NULL DEFAULT 0 COMMENT 'appraised comment id',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_id` int(11) NOT NULL COMMENT '发送者',
+  `to_id` int(11) NOT NULL COMMENT '接收者',
+  `subject` int(11) NOT NULL COMMENT '0：系统通知，1：评论，2：点赞 ，3：新增粉丝，4：私信',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '是否已读,1:已读，0：未读\r\n',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题\r\n',
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '内容',
+  `time` datetime NOT NULL COMMENT '时间',
+  `topic_id` int(11) NOT NULL DEFAULT 0 COMMENT '点赞的文章id',
+  `comment_id` int(11) NOT NULL DEFAULT 0 COMMENT '点赞的评论id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 187 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 192 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of notification
@@ -465,102 +496,107 @@ INSERT INTO `notification` VALUES (183, 0, 1, 4, 1, NULL, '4400000000qq', '2022-
 INSERT INTO `notification` VALUES (184, 99, 1, 4, 1, NULL, '123456789', '2022-11-26 16:45:04', 0, 0);
 INSERT INTO `notification` VALUES (185, 99, 1, 4, 1, NULL, 'qwe', '2022-11-26 16:53:15', 0, 0);
 INSERT INTO `notification` VALUES (186, 99, 1, 2, 0, '帖子点赞通知', '123于Thu Jan 05 18:43:25 CST 2023点赞了你的文章‘<span style=\"color: #0e8c8c\">Linux上传文件</span>‘', '2023-01-05 10:43:26', 81, 0);
+INSERT INTO `notification` VALUES (187, 1, 1, 2, 0, '帖子取消点赞通知', 'liurui于Tue Apr 11 12:49:14 CST 2023取消了对你文章’<span style=\"color: #0e8c8c\">Have everyone started buying Yang Yuhuan\'s new ski</span>’的点赞', '2023-04-11 04:49:14', 76, 0);
+INSERT INTO `notification` VALUES (188, 1, 1, 2, 0, '帖子点赞通知', 'liurui于Tue Apr 11 13:11:16 CST 2023点赞了你的文章‘<span style=\"color: #0e8c8c\">Glory of Kings</span>‘', '2023-04-11 05:11:17', 87, 0);
+INSERT INTO `notification` VALUES (189, 1, 1, 2, 0, '帖子取消点赞通知', 'liurui于Tue Apr 11 13:11:17 CST 2023取消了对你文章’<span style=\"color: #0e8c8c\">Glory of Kings</span>’的点赞', '2023-04-11 05:11:17', 87, 0);
+INSERT INTO `notification` VALUES (190, 7, 1, 2, 0, '帖子点赞通知', 'admin于Tue Apr 18 21:30:21 CST 2023点赞了你的文章‘<span style=\"color: #0e8c8c\">Glory of Kings</span>‘', '2023-04-18 13:30:21', 87, 0);
+INSERT INTO `notification` VALUES (191, 7, 1, 2, 0, '帖子取消点赞通知', 'admin于Tue Apr 18 21:30:22 CST 2023取消了对你文章’<span style=\"color: #0e8c8c\">Glory of Kings</span>’的点赞', '2023-04-18 13:30:23', 87, 0);
 
 -- ----------------------------
 -- Table structure for tag
 -- ----------------------------
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标签名',
-  `topic_count` int NULL DEFAULT 0 COMMENT '文章数量',
+  `topic_count` int(11) NULL DEFAULT 0 COMMENT '文章数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tag
 -- ----------------------------
-INSERT INTO `tag` VALUES (1, '无标签', 11);
-INSERT INTO `tag` VALUES (2, 'c++', 33);
-INSERT INTO `tag` VALUES (3, 'python', 22);
-INSERT INTO `tag` VALUES (4, 'spring', 44);
-INSERT INTO `tag` VALUES (5, 'maven', 55);
-INSERT INTO `tag` VALUES (6, 'idea', 66);
-INSERT INTO `tag` VALUES (7, 'tomcat', 77);
-INSERT INTO `tag` VALUES (8, '算法', 88);
-INSERT INTO `tag` VALUES (9, 'maven', 0);
-INSERT INTO `tag` VALUES (13, 'linux', 0);
-INSERT INTO `tag` VALUES (14, 'java', 0);
+INSERT INTO `tag` VALUES (1, 'none', 11);
+INSERT INTO `tag` VALUES (2, 'LOL', 33);
+INSERT INTO `tag` VALUES (3, 'CF', 22);
+INSERT INTO `tag` VALUES (4, 'wzry', 44);
+INSERT INTO `tag` VALUES (5, 'Genshin', 55);
+INSERT INTO `tag` VALUES (6, 'CSGO', 66);
+INSERT INTO `tag` VALUES (7, 'PUBG', 77);
+INSERT INTO `tag` VALUES (8, 'hpjy', 88);
+INSERT INTO `tag` VALUES (9, 'LOL', 0);
+INSERT INTO `tag` VALUES (13, 'CF', 0);
 
 -- ----------------------------
 -- Table structure for topic
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '帖子id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '帖子id',
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '内容',
-  `comment_count` int NULL DEFAULT 0 COMMENT '评论数',
+  `comment_count` int(11) NULL DEFAULT 0 COMMENT '评论数',
   `topic_time` date NULL DEFAULT NULL COMMENT '创建时间',
-  `topic_user_id` int NOT NULL COMMENT '创建者id',
-  `support_count` int NULL DEFAULT 0 COMMENT '点赞数',
-  `browse_count` int NULL DEFAULT 0 COMMENT '浏览量',
-  `topic_tag_id` int NULL DEFAULT 0 COMMENT '标签id',
+  `topic_user_id` int(11) NOT NULL COMMENT '创建者id',
+  `support_count` int(11) NULL DEFAULT 0 COMMENT '点赞数',
+  `browse_count` int(11) NULL DEFAULT 0 COMMENT '浏览量',
+  `topic_tag_id` int(11) NULL DEFAULT 0 COMMENT '标签id',
   `topic_picture` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'jzytp.jpg' COMMENT '帖子图片',
-  `topic_type` int NULL DEFAULT 1 COMMENT '0:原创，1:转载',
-  `Criticism_count` int UNSIGNED NULL DEFAULT 0 COMMENT '踩',
+  `topic_type` int(11) NULL DEFAULT 1 COMMENT '0:原创，1:转载',
+  `Criticism_count` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '踩',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 90 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of topic
 -- ----------------------------
-INSERT INTO `topic` VALUES (76, 'button无边框', 'style=\"border-style:none; background-color: white; color: #1abc9c\"', 1, '2022-11-24', 1, 1, 61, 1, '1669276951107.jpg', 0, 0);
-INSERT INTO `topic` VALUES (78, 'list.remove(index)失败的原因', '​\n当传的index是int的包装类Integer时候会默认传的是对象，将执行list.remove(object)\n\ntopicList.remove(index.intValue());\n\n转换成int即可\n\n​', 1, '2022-11-24', 1, 2, 15, 1, '1669277059671.jpg', 0, 0);
-INSERT INTO `topic` VALUES (79, 'ajax回调函数得到一整个html的可能原因', '       本来想用ajax返回控制器返回的字符串，但是一直返回另一个页面的整个html代码，检查了好久突然想起来我配了springboot的拦截器，\n将我的ajax请求拦截并返回了一个页面，让这个请求通过即可\n\n            function support(){\n				let message = [[${topic.id}]]\n				let count = [[${topic.getSupportCount()}]]\n				$.get({\n					url: \"/chen/topic/supportOrCriticism/\" + message + \"/1\",\n					success: function (data){\n						if (data === \"success\"){\n							$(\"#support\").css(\"color\", \"deeppink\");\n							$(\"#support\").html(count + 1);\n						}\n						if (data === \"error\"){\n							layer.msg(\"data\")\n						}\n					},\n					error: function (){\n						alert(\"失败\")\n					}\n				})\n			}\n\n\n原因是配置了springboot拦截器，\n\npublic void addInterceptors(InterceptorRegistry registry) {\n        registry.addInterceptor(new LoginHandlerInterceptor())\n                .addPathPatterns(\"/**\").excludePathPatterns(\"/css/**\");\n    }', 2, '2022-11-24', 1, 2, 16, 1, '1669277181490.jpg', 0, 0);
-INSERT INTO `topic` VALUES (80, 'dom操作', 'function usernameCheck() {\n    $.ajax({\n        type : \"get\",\n        url: \"/chen/user/usernameCheck\",\n        data: {\"username\":$(\"#L_username\").val()},\n        success:function (data) {\n            if(data.toString()===\'ok\'){\n                $(\"#usernameInfo\").css(\"color\", \"green\");\n            }else {\n                $(\"#usernameInfo\").css(\"color\", \"red\");\n            }\n            $(\"#usernameInfo\").html(data);\n        }\n    })\n}', 0, '2022-11-24', 1, 1, 1, 1, '1669277234642.jpg', 0, 0);
-INSERT INTO `topic` VALUES (81, 'Linux上传文件', '改权限改权限改权限改权限改权限改权限\n改权限改权限改权限改权限改权限改权限\n改权限改权限改权限改权限改权限改权限\n', 0, '2022-11-24', 1, 1, 3, 1, '1669277297811.jpg', 0, 0);
-INSERT INTO `topic` VALUES (82, 'ajax请求success中走请求', 'location.href=\"updateEmail\"\nlocation.href=\"updateEmail\"', 0, '2022-11-24', 1, 0, 0, 1, '1669277343490.jpg', 0, 0);
-INSERT INTO `topic` VALUES (83, 'jQuery的ajax方法里的success方法第一次不执行，第二次才执行的问题', '在用ajax携带表单中的数据走请求时，第一次success总是不执行，原因是在走ajax之后再执行success之前提交了表单，看了别人的办法是在ajax函数最后return false就行了\n\nfunction sendCode(){\n        $.get({\n            url:\"/chen/updateSendCode\",\n            dataType:\"text\",\n            success:function (data){\n                alert(data)\n            },\n            error:function (){\n                alert(\"失败\")\n            }\n        })\n        return false;	//禁止提交表单\n    }\n\n但是我不行，我直接把表单的from改成div，直接不要表单。', 0, '2022-11-24', 1, 0, 0, 1, '1669277391908.jpg', 0, 0);
-INSERT INTO `topic` VALUES (84, 'js如何限制input输入框只能输入数字', '\n<input type=\"text\"\n       class=\"form-control match-rotation-input\"\n       maxlength=\"3\"\n       onkeyup=\"value=value.replace(/[^\\d]/g,\'\')\"//输入时校验       \n       onblur=\"value=value.replace(/[^\\d]/g,\'\')\"//失去焦点时校验\n       ng-model=\"schedule.round\"\n       placeholder=\"请输入数字\">\n\n添加了一行οnkeyup=\"value=value.replace(/[^\\d]/g,\'\')\"\n\n这里运用了正则表达式来处理比较简单，然后添加提示语：placeholder=\"请输入数字\"。\n\n但是为什么还要加οnblur=\"value=value.replace(/[^\\d]/g,\'\')\"这一行呢？\n\n这是因为在操作的过程中，会发现如果你一直常按着字母键，然后点击鼠标让input失去焦点，\n\n会导致在input框中出现字母，所以为了避免这个问题，后面又加入了οnblur=\"value=value.replace(/[^\\d]/g,\'\')\"\n\n注意：之前想过改type为：number类型  但是出来的样式不符合我们要的，所以采用了正则来匹配\n\n要是觉得好用  就留下你们的赞吧 ! ! !\n————————————————\n原文链接：https://blog.csdn.net/Lucky_bo/article/details/81870967\n', 0, '2022-11-24', 1, 0, 10, 1, '1669277447039.jpg', 1, 0);
-INSERT INTO `topic` VALUES (85, '解决springboot图片上传后需要重启服务器才能显示图片', '这是一种保护机制，为了防止绝对路径被看出来，目录结构暴露\n\n添加一个config类，将虚拟路径向绝对路径映射\n\n配置虚拟路径，location配置的是真实路径，handler需要注意\n\n要配置与前端图片展示的相对路径一致 （/img/avatar）  之前只配置了/avatar 一直不行\n\n// 扩展配置类\n@Configuration\npublic class MyMvcConfig implements WebMvcConfigurer {\n\n    public void addResourceHandlers(ResourceHandlerRegistry registry) {\n        registry.addResourceHandler(\"/img/avatar/**\").\n                addResourceLocations(\"file:D:/github/layui/src/main/resources/static/img/avatar/\");\n        registry.addResourceHandler(\"/img/topicPicture/**\").\n                addResourceLocations(\"file:D:/github/layui/src/main/resources/static/img/topicPicture/\");\n    }\n\n}\n\n<a th:href=\"@{/toPersonal/topic}\" th:if=\"${session.loginUser != null}\">\n     <img th:src=\"@{/img/avatar/} + ${session.loginUser.avatar}\" width=\"45\" height=\"45\">\n</a>', 0, '2022-11-24', 1, 0, 0, 1, '1669277798480.jpg', 0, 0);
-INSERT INTO `topic` VALUES (86, '@PostConstruct注解', '一 @PostConstruct注解的作用\n1.1 作用\n1.@PostConstruct该注解被用来修饰一个非静态的void（）方法。\n\n@PostConstruct\n\npublic void someMethod(){}\n\n2.被@PostConstruct修饰的方法会在服务器加载Servlet的时候运行，并且只会被服务器执行一次\n\nPostConstruct在构造函数之后执行，init（）方法之前执行。\n\n3.被@PostConstruct注解的方法，将会在依赖注入完成后被自动调用。\n\n1.2  使用场景\n如果想在生成对象时完成某些初始化操作，而偏偏这些初始化操作又依赖于依赖注入，那么久无法在构造函数中实现。为此，可以使用@PostConstruct注解一个方法来完成初始化，@PostConstruct注解的方法将会在依赖注入完成后被自动调用。\n\n\n    @Autowired\n    private CutPage cutPage;\n\n    @PostConstruct\n    public void init(){\n        cutPage.setEveryPageCount(MyStaticProperties.everyPageTopicCount);\n    }\n\n我需要在注入cutPage后调用set来初始化，但是在spring没找到用构造函数的做法，\n\n使用@PostConstruct注解的方法会在装配完依赖后执行初始化\n\n\n原文链接：https://blog.csdn.net/u011066470/article/details/122844165', 0, '2022-11-24', 1, 0, 0, 1, '1669277853998.jpg', 1, 0);
-INSERT INTO `topic` VALUES (87, 'springboot 配置文件注入静态变量避坑', '前缀prefi不能用驼峰命名，只能全小写\n@Component\n@ConfigurationProperties(prefix = \"index.static.properties\")\n\n若要注入的是静态变量，不能用lombox，要手动加入get跟set，并且把set方法不能是static\npublic static int getEveryPageTopicCount() {\n        return everyPageTopicCount;\n    }\n\n    public void setEveryPageTopicCount(int everyPageTopicCount) {\n        MyStaticProperties.everyPageTopicCount = everyPageTopicCount;\n    }', 0, '2022-11-24', 1, 1, 0, 1, '1669277910439.jpg', 0, 0);
-INSERT INTO `topic` VALUES (88, 'ajax', '用id选择器\n\ndata: 要传的参数\n\nurl: 请求\n\nsuccess：请求成功后要执行的任务，success中的data是Controller返回的json数据\n\n<script>\n            function add(){\n                $.ajax({\n                    type: \"POST\",\n                    url:\"/chen/submitAdd\",\n                    data:$(\'#myform\').serialize(),\n                    async: false,\n                    error: function(request) {\n                        alert(\"Connection error\");\n                    },\n                    success: function(data) {\n                        alert(data);\n                    }\n                });\n            }\n        </script>\n\n<!--$(\'#myform\').serialize() 将表单的数据序列化，但是表单中的name一定要与后端的参数名对应-->\n\n<script>\n        function rePasswordCheck() {\n            $.ajax({\n                type : \"POST\",\n                url: \"/chen/rePasswordCheck\",\n                data: {\n                    \"rePassword\":$(\"#L_repass\").val(),\n                    \"password\":$(\"#L_pass\").val()\n                },\n                success:function (data) {\n                    if(data.toString()===\'ok\'){\n                        $(\"#rePasswordInfo\").css(\"color\", \"green\");\n                    }else {\n                        $(\"#rePasswordInfo\").css(\"color\", \"red\");\n                    }\n                    $(\"#rePasswordInfo\").html(data);\n                }\n            })\n        }\n    </script>\n\n@PostMapping(\"/rePasswordCheck\")\n    @ResponseBody\n    public String rePasswordCheck(String password, String rePassword){\n        if(password.equals(rePassword)){\n            return \"ok\";\n        } else {\n            return \"两次密码不一致！\";\n        }\n    }', 0, '2022-11-24', 1, 1, 2, 1, '1669278028519.jpg', 0, 0);
-INSERT INTO `topic` VALUES (89, 'ww', 'qweqwewqewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', 0, '2022-11-24', 1, 0, 0, 1, '1669293179604.jpg', 0, 0);
+INSERT INTO `topic` VALUES (76, 'Have everyone started buying Yang Yuhuan\'s new ski', 'The first skin of the first season of the \"Canyon Chronicles\" series represents the spring of recovery for all things, and Yang Yuhuan\'s Silver Feather Spring Language has been launched!\r\nWhether it\'s appearance animations, posters, modeling, or game special effects, they are all very beautiful. The most crucial thing is that they have a strong sense of impact, and the sound effects of the skills add silver collision sounds, which are very clear and crisp.\r\nBuy early and enjoy early, and buy late with discounts. As skin is sold directly, you can also wait for discounts to be available later, such as mystery stores and birthday discounts.', 2, '2022-11-24', 1, 0, 92, 1, 'yangyuhuan.png', 0, 0);
+INSERT INTO `topic` VALUES (78, 'Kuangtie has received a hero quality upgrade', 'As the story of Haidu gradually unfolds, Kuaishi Iron has experienced an upgrade in hero quality\r\nHis robotic arm has been refurbished, becoming more sturdy and powerful, and its coordination with the weapon giant hammer has also become more refined.\r\nThe crazy iron in the new outfit makes the pants legs lighter and more capable, making the whole person look much more energetic.\r\nNowadays, he possesses even more powerful power\r\nQuickly poke open the video and watch the gameplay adjustments of Kuangtie with Benhu\r\nAs the story of Haidu gradually unfolds, Kuaishi Iron has experienced an upgrade in hero quality\r\nHis robotic arm has been refurbished, becoming more sturdy and powerful, and its coordination with the weapon giant hammer has also become more refined.\r\nThe crazy iron in the new outfit makes the pants legs lighter and more capable, making the whole person look much more energetic.\r\nNowadays, he possesses even more powerful power\r\nQuickly poke open the video and watch the gameplay adjustments of Kuangtie with Benhu\r\nAs the story of Haidu gradually unfolds, Kuaishi Iron has experienced an upgrade in hero quality\r\nHis robotic arm has been refurbished, becoming more sturdy and powerful, and its coordination with the weapon giant hammer has also become more refined.\r\nThe crazy iron in the new outfit makes the pants legs lighter and more capable, making the whole person look much more energetic.\r\nNowadays, he possesses even more powerful power\r\nQuickly poke open the video and watch the gameplay adjustments of Kuangtie with Benhu', 1, '2022-11-24', 1, 2, 17, 1, 'ac8586e4c567cdc290d24b909822790.png', 0, 0);
+INSERT INTO `topic` VALUES (79, '\"Seven in and seven out\" is no longer the label of', 'Hello everyone, I am at the fingertips. \"Seven in and seven out Zhao Zilong\" is the evaluation of Zhao Yun in previous versions. However, with the continuous changes of the version, there was a time when Zhao Yun went from being a hero who entered multiple times to becoming a regular hero. Although he has returned to a semi fleshy gameplay, it seems that he doesn\'t deserve the evaluation of seven in and seven out. In the current version, compared to other heroes, Zhao Yun seems a bit awkward, so this article takes a look at how he can truly achieve \"seven in and seven out\"', 2, '2022-11-24', 1, 2, 18, 1, '1669277181490.jpg', 0, 0);
+INSERT INTO `topic` VALUES (80, 'Introduction Team | Pig Bajie\'s General Techniques', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 1, 2, 1, '1669277234642.jpg', 0, 0);
+INSERT INTO `topic` VALUES (81, 'Strategy Group | Sun Wukong\'s Counterpart Dianwei ', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 1, 4, 1, '1669277297811.jpg', 0, 0);
+INSERT INTO `topic` VALUES (82, 'Introduction Team | Eastern Emperor Tai Yi Pai Liu', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 0, 0, 1, '1669277343490.jpg', 0, 0);
+INSERT INTO `topic` VALUES (83, 'Introduction Team | General Techniques of Da Mo in', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 0, 0, 1, '1669277391908.jpg', 0, 0);
+INSERT INTO `topic` VALUES (84, 'Strategy Team | Dharma Pair Assistant General Tech', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 0, 10, 1, '1669277447039.jpg', 1, 0);
+INSERT INTO `topic` VALUES (85, 'Strategy Team | Sun Ce\'s Counter Armor Technique', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 0, 0, 1, '1669277798480.jpg', 0, 0);
+INSERT INTO `topic` VALUES (86, 'Facing Mingshiyin\'s alignment skills', '【 Attention points for alignment 】\r\nTIPS: It is difficult for Zhu Bajie to kill opponents alone, and time should not be wasted on the line.\r\nEarly stage: Do not press the line too deeply to avoid getting stuck. During the blood exchange period, try to hit as many units as possible with skill 1. During this period, try to lead the enemy to the wall or near the side of your own tower, and better coordinate with teammates once.\r\nMid term: Avoid wasting time on Tan Bian. After encountering the 2 skills of multiple displacement heroes, do not immediately take on general attacks. When encountering Guan Yu and Ma Chao, use the 2 skills yourself without deliberately pursuing linkage with the wall.', 0, '2022-11-24', 1, 0, 5, 1, '1669277853998.jpg', 1, 0);
+INSERT INTO `topic` VALUES (87, 'Glory of Kings', 'King of Glory is a 5V5 combat game', 1, '2023-04-11', 1, 0, 5, 0, 'wangzherongyao.jpg', 0, 0);
+INSERT INTO `topic` VALUES (88, 'League of Legends(LOL)', 'League of Legends(LOL) is a 5V5 combat game', 0, '2023-04-11', 1, 0, 0, 0, 'LOL.jpg', 0, 0);
+INSERT INTO `topic` VALUES (89, 'Game for Peace', 'Peace Elite is a survival gunfight game', 0, '2023-04-11', 1, 0, 1, 0, 'hepingjingying.jpg', 0, 0);
+INSERT INTO `topic` VALUES (90, 'Cross Fire(CF)', 'Crossing the Fire Line is an FPS shooting game', 0, '2023-04-11', 1, 0, 1, 0, 'CF.JPG', 0, 0);
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `avatar` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'defaultAvatar.jpg' COMMENT '头像',
   `introduction` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '_utf8mb4\\\'æ­¤ç¨æ·å¾æï¼æ²¡æçä¸èªæä»ç»\\\'' COMMENT '签名',
-  `topic_count` int NULL DEFAULT 0 COMMENT '帖子数量',
-  `comment_count` int NULL DEFAULT 0 COMMENT '评论数量',
-  `rank_id` int NULL DEFAULT 1 COMMENT '权限等级',
-  `support_count` int NULL DEFAULT 0 COMMENT '点赞数',
-  `rank_level` int NULL DEFAULT 1,
+  `topic_count` int(11) NULL DEFAULT 0 COMMENT '帖子数量',
+  `comment_count` int(11) NULL DEFAULT 0 COMMENT '评论数量',
+  `rank_id` int(11) NULL DEFAULT 1 COMMENT '权限等级',
+  `support_count` int(11) NULL DEFAULT 0 COMMENT '点赞数',
+  `rank_level` int(11) NULL DEFAULT 1,
   `sex` int(10) UNSIGNED ZEROFILL NULL DEFAULT 0000000000 COMMENT '性别',
-  `browse_count` int NULL DEFAULT 0 COMMENT '被浏览数量',
-  `secret` int NOT NULL DEFAULT 0 COMMENT '是否私密',
+  `browse_count` int(11) NULL DEFAULT 0 COMMENT '被浏览数量',
+  `secret` int(11) NOT NULL DEFAULT 0 COMMENT '是否私密',
   PRIMARY KEY (`id`, `username`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'whiteCat', '123456', '1345305701@qq.com', '1669293156078.jpg', '此用户很懒，没有留下自我介绍', 13, 6, 1, 8, 1, 0000000001, 103, 0);
-INSERT INTO `user` VALUES (2, '大炮', '123456', '789@qq.com', 'dapao.png', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
+INSERT INTO `user` VALUES (1, 'liurui', '123456', '1345305701@qq.com', '1669293156078.jpg', '此用户很懒，没有留下自我介绍', 13, 9, 1, 7, 1, 0000000001, 153, 0);
+INSERT INTO `user` VALUES (2, 'paul', '123456', '789@qq.com', 'dapao.png', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
 INSERT INTO `user` VALUES (3, 'OP', '123456', '1qqqq@qq.com', 'zhuge.png', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
-INSERT INTO `user` VALUES (4, '张三', '123456', '123@qq.com', 'xiaosan.png', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
+INSERT INTO `user` VALUES (4, 'zhangsan', '123456', '123@qq.com', 'xiaosan.png', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
 INSERT INTO `user` VALUES (6, '666', '123456', 'whitecat1178@163.com', '1668164368257.jpg', 'hh', 0, 0, 1, 7, 1, 0000000000, 29, 0);
 INSERT INTO `user` VALUES (7, 'admin', '123456', '65389@qq.com', '3.png', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
-INSERT INTO `user` VALUES (97, '月亮大人', '123456', '23456@qq.com', 'defaultAvatar.jpg', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
+INSERT INTO `user` VALUES (97, 'moon', '123456', '23456@qq.com', 'defaultAvatar.jpg', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
 INSERT INTO `user` VALUES (98, 'wenwen', '123456', '1499253481@qq.com', 'defaultAvatar.jpg', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);
 INSERT INTO `user` VALUES (99, '123', '123456', '13453057011@qq.com', '1674803453332.jpg', '此用户很懒，没有留下自我介绍', 0, 5, 1, 1, 1, 0000000000, 18, 0);
 INSERT INTO `user` VALUES (112, 'alaions', '123456', '1345305701222@qq.com', '1669276685855.jpg', '此用户很懒，没有留下自我介绍', 0, 0, 1, 0, 1, 0000000000, 0, 0);

@@ -34,8 +34,8 @@
 			<div class="blog-container">
 				<div class="blog-main">
 					<blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
-						<a href="userIndex.html" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
-						<a href="article.html" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
+						<a href="userIndex.html" title="Home">Home<span class="layui-box">&gt;</span></a>
+						<a href="article.html" title="Article">Article<span class="layui-box">&gt;</span></a>
 						<a><cite class="title" th:text="${topic.title}"></cite></a>
 					</blockquote>
 					<div class="blog-main" style="width: 1775px">
@@ -45,9 +45,9 @@
 							<div class="article-detail shadow">
 								<div class="article-detail-title title" th:text="${topic.title}"></div>
 								<div class="article-detail-info">
-									<span th:text="${'时间:' + #dates.format(topic.topicTime, 'yyyy-MM-dd')}"></span>
-									<span th:text="${'作者:' + topic.user.username}"></span>
-									<span th:text="${'浏览量:' + topic.browseCount}"></span>
+									<span th:text="${'Time:' + #dates.format(topic.topicTime, 'yyyy-MM-dd')}"></span>
+									<span th:text="${'Author:' + topic.user.username}"></span>
+									<span th:text="${'View volume:' + topic.browseCount}"></span>
 								</div>
 								<button th:onclick="supportTopic()" class="article-viewinfo" style="border-style:none; background-color: white" th:if="${appraiseTopicMap[topic.id] == 1}"><i class="fa fa-thumbs-o-up" id="support"  style="color: deeppink" th:text=" ${topic.getSupportCount()}"></i>&nbsp;&nbsp;</button>
 								<button th:onclick="supportTopic()" class="article-viewinfo" style="border-style:none; background-color: white" th:if="${appraiseTopicMap[topic.id] == null || appraiseTopicMap[topic.id] == 0}"><i id="support" class="fa fa-thumbs-o-up"   style="color: cornflowerblue" th:text=" ${topic.getSupportCount()}"></i>&nbsp;&nbsp;</button>
@@ -58,20 +58,20 @@
 
 							<div class="blog-module shadow" style="box-shadow: 0 1px 8px #a6a6a6;">
 								<fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0">
-									<legend>来说两句吧</legend>
+									<legend>Let's just say a few words</legend>
 									<div class="layui-field-box">
 										<div class="layui-form blog-editor">
 											<input type="hidden" id="commentTopicId" th:value="${topic.id}">
 											<div class="layui-form-item">
-												<textarea required="required" id="content" name="content" class="layui-textarea" placeholder="请输入内容"></textarea>
+												<textarea required="required" id="content" name="content" class="layui-textarea" placeholder="Please enter content"></textarea>
 											</div>
 												<div class="layui-form-item ">
-													<button class="layui-btn" th:onclick="submitComment([[${topic.id}]])">提交评论</button>
+													<button class="layui-btn" th:onclick="submitComment([[${topic.id}]])">Submit comments</button>
 												</div>
 										</div>
 									</div>
 								</fieldset>
-								<div class="blog-module-title ">最新评论</div>
+								<div class="blog-module-title ">Latest comments</div>
 									<!--<ul class="blog-comment " id="commentList"></ul>-->
 								<div class="mt20">
 									<ul class="message-list" id="message-list">
@@ -96,8 +96,8 @@
 													<button th:onclick="supportComment([[${comment.id}]])" class="article-viewinfo" style="border-style:none; background-color: white" th:if="${appraiseCommentMap[comment.id] == null || appraiseCommentMap[comment.id] == 0}">
 														<i class="fa fa-thumbs-o-up"   style="color: cornflowerblue" th:text=" ${comment.getSupportCount()}"></i>&nbsp;&nbsp;
 													</button>
-													<a th:href="@{/reply/} + ${comment.author.id} + '/' + ${topic.id} + '/' + ${comment.floor} + '/' + ${comment.author.username}" class="btn-reply" data-targetid="1" th:data-targetname="${comment.author.username}">回复</a>
-													<a style="border-style:none; background-color: white; color: #e61a8d" th:if="${comment.author.id == session?.loginUser?.id}">删除</a>
+													<a th:href="@{/reply/} + ${comment.author.id} + '/' + ${topic.id} + '/' + ${comment.floor} + '/' + ${comment.author.username}" class="btn-reply" data-targetid="1" th:data-targetname="${comment.author.username}">reply</a>
+													<a style="border-style:none; background-color: white; color: #e61a8d" th:if="${comment.author.id == session?.loginUser?.id}">delete</a>
 												</p>
 											</div>
 											<hr/>
@@ -107,7 +107,7 @@
 												<img th:src="@{/images/avatar/} + ${child.author.avatar}">
 												<div class="info">
 													<a th:href="@{/toOtherPersonal/} + ${child.author.id}"><span class="username" th:text="${child.author.username}"></span><a/>
-													<span style="padding-right:0;margin-left:-5px;">回复</span>
+													<span style="padding-right:0;margin-left:-5px;">reply</span>
 														<a th:href="@{/toOtherPersonal/} + ${child.replyTo?.id}"><span class="username" th:text="${child.replyTo?.username}"></span><a/>
 													<span th:text="${child.content}"></span>
 												</div>
@@ -121,7 +121,7 @@
 													<button th:onclick="supportComment([[${child.id}]])" class="article-viewinfo" style="border-style:none; background-color: white" th:if="${appraiseCommentMap[child.id] == null || appraiseCommentMap[child.id] == 0}">
 														<i class="fa fa-thumbs-o-up"   style="color: cornflowerblue" th:text=" ${child.getSupportCount()}"></i>&nbsp;&nbsp;
 													</button>
-													<a th:href="@{/reply/} + ${child.author.id} + '/' + ${topic.id} + '/' + ${child.floor} + '/' + ${child.author.username}" class="btn-reply2" data-targetid="2" th:data-targetname="${child.author.username}">回复</a>
+													<a th:href="@{/reply/} + ${child.author.id} + '/' + ${topic.id} + '/' + ${child.floor} + '/' + ${child.author.username}" class="btn-reply2" data-targetid="2" th:data-targetname="${child.author.username}">reply </a>
 													<input type="hidden" id="replyId" th:value="${child.author.id}">
 												</p>
 											</div>

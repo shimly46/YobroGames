@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
 		<meta http-equiv="Content-Language" content="zh-CN" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<title>WhiteCat</title>
+		<title>Yobro</title>
 		<link rel="shortcut icon" th:href="@{images/logo.png}" type="image/x-icon" />
 		<!--Layui-->
 		<link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
@@ -28,8 +28,8 @@
 
 			<div class="blog-container">
 				<blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
-					<a href="userIndex.html" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
-					<a><cite>文章专栏</cite></a>
+					<a href="userIndex.html" title="Home">Home<span class="layui-box">&gt;</span></a>
+					<a><cite>Article</cite></a>
 				</blockquote>
 				<div class="blog-main">
 
@@ -41,8 +41,8 @@
 								</div>
 								<div class="article-right">
 									<div class="article-title">
-										<span class="article_is_top" th:if="${topic.topicType == 0}">原创</span>&nbsp;
-										<span class="article_is_yc" th:if="${topic.topicType == 1}">搬运</span>&nbsp;
+										<span class="article_is_top" th:if="${topic.topicType == 0}">original</span>&nbsp;
+										<span class="article_is_yc" th:if="${topic.topicType == 1}">carry</span>&nbsp;
 										<a th:href="@{/detail/} + ${topic.id}" th:text="${topic.title}"></a>
 									</div>
 									<div class="article-abstract">
@@ -69,19 +69,19 @@
 							<div class="layui-flow-more " style="background: white">
 								<div class="page">
 									<div>
-										<a class="prev" th:href="@{/article/lastPage}">上一页</a>
+										<a class="prev" th:href="@{/article/lastPage}">previous</a>
 										<a class="num" th:href="@{/article/toWhichPage/} + ${cutPage.lastPage}" th:text="${cutPage.lastPage}" th:if="${cutPage.lastPage!=0}"></a>
 										<span class="current" style="color: mediumseagreen" th:text="${cutPage.nowPage}"></span>
 										<a class="num" th:href="@{/article/toWhichPage/} + ${cutPage.nextPage}" th:text="${cutPage.nextPage}" th:if="${cutPage.nowPage != cutPage.getPageCount()}"></a>
-										<a class="next" th:href="@{/article/nextPage}">下一页</a>
-										<a class="num" href="" th:text="共 + ${cutPage.pageCount} + 页"></a>
+										<a class="next" th:href="@{/article/nextPage}">next</a>
+										<a class="num" href="" th:text="all + ${cutPage.pageCount} + page"></a>
 										<div class="layui-inline layui-show-xs-block">
-											<input type="text" id="pageCount" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" placeholder="页数" autocomplete="off" class="layui-input" style="width: 50px">
+											<input type="text" id="pageCount" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" placeholder="" autocomplete="off" class="layui-input" style="width: 50px">
 										</div>
 										<div class="layui-inline layui-show-xs-block">
 											<button class="layui-btn" onclick="toWhichPage()"><i class="layui-icon">&#xe615;</i></button>
 										</div>
-										<a class="num" th:text="共 + ${cutPage.totalCount} + 条"></a>
+										<a class="num" th:text="all + ${cutPage.totalCount} + pieces"></a>
 									</div>
 								</div>
 							</div>
@@ -93,7 +93,7 @@
 						<div class="blog-search animated fadeInRight">
 							<div class="layui-form-item">
 								<div class="search-keywords  shadow">
-									<input type="text" id="tagMessage" name="keywords" lay-filter="searchInput" lay-verify="required" placeholder="输入关键词搜索" autocomplete="off" class="layui-input">
+									<input type="text" id="tagMessage" name="keywords" lay-filter="searchInput" lay-verify="required" placeholder="Enter keyword search" autocomplete="off" class="layui-input">
 								</div>
 								<div class="search-submit  shadow">
 									<button class="search-btn" onclick="searchTag()"><i class="fa fa-search"></i></button>
@@ -102,7 +102,7 @@
 						</div>
 
 						<div class="article-category shadow categoryOut">
-							<div class="article-category-title">分类导航</div>
+							<div class="article-category-title">Classification navigation</div>
 								<a th:href="@{/category/} + ${tag.id}" th:text="${tag.name}" th:each="tag:${tagList}"></a>
 							<div class="clear"></div>
 						</div>

@@ -61,26 +61,26 @@ public class RegisterController {
                 long time = Long.parseLong(codeTime);
                 long remainingTime = timeUtil.getTime(time);
                 if (remainingTime < 60){
-                    return "已发送，请" + (60 - remainingTime) + "秒后重试！";
+                    return "Have been sent，Please try after" + (60 - remainingTime) + "seconds！";
                 }
             }
         }
 
         if (!StringUtils.hasText(email)) {
-            return "请先输入邮箱！";
+            return "Please input the email！";
         }
         if (!email.matches("^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$")){
-            return "邮箱格式错误！";
+            return "Wrong email format！";
         }
         if(Objects.nonNull(userService.getUserByEmail(email))){
-            return "该邮箱已被使用！";
+            return "This email has been used！";
         }
         String code = RandomCode.getRandomCode();
         codeMap.put(session.getId(), code);
-        sendEmail.send(email, "注册验证码为：" + code + "（请注意区分大小写！）");
+        sendEmail.send(email, "The verification code is：" + code + "（Note Case sensitivity！）");
         session.setAttribute("codeTime", timeUtil.setTime());
 
-        return "发送成功！";
+        return "Send Succeed！";
     }
 
 
@@ -90,10 +90,10 @@ public class RegisterController {
         if (!checkUtil.check(registerUser)){
             return registerService.registerCheck(registerUser);
         }if(Objects.isNull(codeMap.get(session.getId())) || !StringUtils.hasText(codeMap.get(session.getId()))){
-            return "请先发送验证码！";
+            return "Please send the code！";
         }else {
             if(!codeMap.get(session.getId()).equals(registerUser.getCode())){
-                return "验证码错误！";
+                return "Captcha error！";
             }
         }
         userService.insertUser(registerService.registerUserTurnToUser(registerUser));

@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
 		<meta http-equiv="Content-Language" content="zh-CN" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<title>WhiteCat</title>
+		<title>Yobro</title>
 		<link rel="shortcut icon" th:href="@{images/logo.png}" type="image/x-icon" />
 		<link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
 		<link th:href="@{/font-awesome/css/font-awesome.min.css}" rel="stylesheet" />
@@ -42,8 +42,8 @@
 					<div class="home-tips shadow">
 						<i style="float:left;line-height:17px;" class="fa fa-volume-up"></i>
 						<div class="home-tips-container">
-							<span style="color: rgb(0, 150, 136); cursor: pointer; display: none;"><p><span>如果出现404或500的bug可以点击导航栏上的“联系我”发送相关消息哦~</span></p></span>
-							<span style="color: rgb(0, 150, 136); cursor: pointer; display: block;"><p><span th:text="累计有 + ${visitCount} + 个IP访问过此网站"></span></p></span>
+<!--							<span style="color: rgb(0, 150, 136); cursor: pointer; display: none;"><p><span>如果出现404或500的bug可以点击导航栏上的“联系我”发送相关消息哦~</span></p></span>-->
+							<span style="color: rgb(0, 150, 136); cursor: pointer; display: block;"><p><span>Accumulated 1 IP visited this website</span></p></span>
 						</div>
 					</div>
 
@@ -56,8 +56,8 @@
 								</div>
 								<div class="article-right">
 									<div class="article-title">
-										<span class="article_is_top" th:if="${topic.topicType == 0}">原创</span>&nbsp;
-										<span class="article_is_yc" th:if="${topic.topicType == 1}">搬运</span>&nbsp;
+										<span class="article_is_top" th:if="${topic.topicType == 0}">original</span>&nbsp;
+										<span class="article_is_yc" th:if="${topic.topicType == 1}">carry</span>&nbsp;
 										<a th:href="@{/detail/} + ${topic.id}" th:text="${topic.title}"></a>
 									</div>
 									<div class="article-abstract">
@@ -83,19 +83,19 @@
 							<div class="layui-flow-more " style="background: white">
 								<div class="page">
 									<div>
-										<a class="prev" th:href="@{/index/lastPage}">上一页</a>
+										<a class="prev" th:href="@{/index/lastPage}">previous</a>
 										<a class="num" th:href="@{/index/toWhichPage/} + ${cutPage.lastPage}" th:text="${cutPage.lastPage}" th:if="${cutPage.lastPage!=0}"></a>
 										<span class="current" style="color: mediumseagreen" th:text="${cutPage.nowPage}"></span>
 										<a class="num" th:href="@{/index/toWhichPage/} + ${cutPage.nextPage}" th:text="${cutPage.nextPage}" th:if="${cutPage.nowPage != cutPage.getPageCount()}"></a>
-										<a class="next" th:href="@{/index/nextPage}">下一页</a>
-										<a class="num" href="" th:text="共 + ${cutPage.pageCount} + 页"></a>
+										<a class="next" th:href="@{/index/nextPage}">next</a>
+										<a class="num" href="" th:text="all + ${cutPage.pageCount}"></a>
 										<div class="layui-inline layui-show-xs-block">
-											<input type="text" id="pageCount" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" placeholder="页数" autocomplete="off" class="layui-input" style="width: 50px">
+											<input type="text" id="pageCount" onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')" placeholder="pages num" autocomplete="off" class="layui-input" style="width: 50px">
 										</div>
 										<div class="layui-inline layui-show-xs-block">
 											<button class="layui-btn" onclick="toWhichPage()"><i class="layui-icon">&#xe615;</i></button>
 										</div>
-										<a class="num" th:text="共 + ${cutPage.totalCount} + 条"></a>
+										<a class="num" th:text="all + ${cutPage.totalCount} + pieces"></a>
 									</div>
 								</div>
 							</div>
@@ -106,8 +106,8 @@
 					<div class="blog-main-right">
 						<div class="layui-tab layui-tab-brief shadow animated fadeInRight" lay-filter="docDemoTabBrief">
 							<ul class="layui-tab-title">
-								<li class="layui-this">点击排行</li>
-								<li>最新发布</li>
+								<li class="layui-this">Click Ranking</li>
+								<li>Latest Release</li>
 							</ul>
 							<div class="layui-tab-content">
 								<div class="layui-tab-item layui-show">
@@ -127,8 +127,8 @@
 									<ul class="blog-module-ul" th:each="topic:${NearTimeTopic}">
 										<li>
 											&nbsp;
-											<span class="article_is_yc" th:if="${topic.topicType == 0}">原创</span>
-											<span class="article_is_yc" th:if="${topic.topicType == 1}">搬运</span>
+											<span class="article_is_yc" th:if="${topic.topicType == 0}">original</span>
+											<span class="article_is_yc" th:if="${topic.topicType == 1}">carry</span>
 											<a th:href="@{/detail/} + ${topic.id}" th:text="${topic.title}"></a>
 										</li>
 									</ul>
@@ -137,7 +137,7 @@
 						</div>
 
 						<div class="blog-module shadow animated fadeInRight fadeInUp">
-							<div class="blog-module-title"><i class="layui-icon"></i>&nbsp;热评用户</div>
+							<div class="blog-module-title"><i class="layui-icon"></i>&nbsp;Hot review users</div>
 							<ul class="hotusers-list">
 								<li class="hotusers-list-item" th:each="user:${hotComment}">
 									<div class="hotusers-top hotusers-num" th:text="${hotComment.indexOf(user) + 1}"></div>
@@ -147,7 +147,7 @@
 									</div>
 									<div>
 										<a th:href="@{/toOtherPersonal/} + ${user.id}"><div class="hotusers-nick" th:text="${user.username}"></div></a>
-										<span class="hotusers-totalcmt" th:text="本站评论数 + ':' + ${user.commentCount}"></span>
+										<span class="hotusers-totalcmt" th:text="Numbers + ':' + ${user.commentCount}"></span>
 									</div>
 									<span class="hotusers-icons"></span>
 								</li>

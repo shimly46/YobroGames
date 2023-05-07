@@ -40,7 +40,7 @@
                 <div id="parentArticleList" class="blog-main-left animated slideInLeft">
                     <div class="blog-module shadow" style="box-shadow: 0 1px 8px #a6a6a6;">
                         <fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0" >
-                            <legend th:text="私信 + ${user.username}"></legend>
+                            <legend th:text="letter + ${user.username}"></legend>
                             <div class="layui-field-box">
                                 <div class="layui-input-inline" style="width: 100px">
                                 </div>
@@ -48,7 +48,7 @@
                                     <textarea required="required" id="content" name="content" class="layui-textarea" placeholder="请输入内容" style="height: 500px"></textarea>
                                 </div>
                                 <div class="layui-form-item ">
-                                    <button type="submit" class="layui-btn" th:onclick="submitChat([[${user.id}]])">发送</button>
+                                    <button type="submit" class="layui-btn" th:onclick="submitChat([[${user.id}]])">submit</button>
                                 </div>
                             </div>
                         </fieldset>

@@ -160,4 +160,21 @@ public class ArticleController {
 
     }
 
+    @GetMapping("/toGameLib")
+    public String toGameLib(HttpSession session){
+
+
+        /*为每个用户分配一个分页对象*/
+        if (!cutPageMap.containsKey(session.getId())){
+            cutPage.putPageInMap(cutPageMap, session, topicService);
+        }
+
+        // 每次回来都要将页码归1，且更新list，区别于select后的list
+        cutPageMap.get(session.getId()).setNowPage(1);
+        cutPageMap.get(session.getId()).setTotalCount(topicService.getTotalTopicCount());
+
+        topicList = topicService.getTopicList();
+        return "redirect:/code.html";
+    }
+
 }

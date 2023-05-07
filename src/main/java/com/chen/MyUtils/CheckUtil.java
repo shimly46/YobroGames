@@ -37,31 +37,31 @@ public class CheckUtil {
     public String checkReturnMessage(RegisterUser registerUser){
         String message = "";
         if (!Objects.isNull(userService.getUserByUsername(registerUser.getUsername()))){
-            return "用户名已存在！";
+            return "The username already exists！";
         }
         if (!StringUtils.hasText(registerUser.getUsername())){
-            return "用户名不能为空！";
+            return "The username cannot be Null！";
         }
         if (!checkUsername(registerUser.getUsername())){
-            return  "用户名长度需3-10！";
+            return  "Username length should within 3-10！";
         }
         if (!StringUtils.hasText(registerUser.getPassword())){
-            return "密码不能为空！";
+            return "The password cannot be empty！";
         }
         if (!checkPassword(registerUser.getPassword())){
-            return "密码长度需6-10！";
+            return "Password length should be 6-10！";
         }
         if (!StringUtils.hasText(registerUser.getAgainPassword())){
-            return "密码不能为空！";
+            return "The password cannot be Null！";
         }
         if (!checkPasswordReply(registerUser.getPassword(), registerUser.getAgainPassword())){
-            return "两次密码不一致！";
+            return "Two different passwords！";
         }
         if (!StringUtils.hasText(registerUser.getEmail())){
-            return "邮箱不能为空！";
+            return "The mailbox cannot be empty！";
         }
         if (!checkEmail(registerUser.getEmail())){
-            return "邮箱不正确！";
+            return "Incorrect email address！";
         }
         return message;
     }

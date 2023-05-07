@@ -36,22 +36,22 @@ public class AdminTagController {
 
     @GetMapping("/tagList")
     public String topicList(Model model){
-        // 分页信息
+        // page ins
         cutPage.setNowPage(1);
-        // 将展示数量恢复
+        // recover page quantity
         cutPage.setEveryPageCount(CutPage.EVERYPAGECOUNT);
-        // 总量
+        // total
         cutPage.setTotalCount(tagService.getTotalTagCount());
 
-        // 搜索框为空
+        // Search NULL
         select.setSelectMessage("");
-        // 将展示数量恢复
+        // recover showing page
         select.setShowCount(CutPage.EVERYPAGECOUNT);
-        // 分页展示判断
+        // paging justify
         tagList = tagService.getTagList();
         model.addAttribute("tagList", cutPage.getLimitList(tagList));
 
-        // 更新要展示的list
+        // update list
         model.addAttribute("cutPage", cutPage);
         model.addAttribute("select", select);
 
@@ -60,18 +60,18 @@ public class AdminTagController {
 
 
     @GetMapping("/selectSubmit")
-    // selectMessage不为空，则是正常搜索，为空则是空搜索或者是nextPage重定向回来
+
     public String selectSubmit(Select viewSelect, Model model){
-        // 直接select = viewSelect会将showCount归0
+
         int showCount = select.getShowCount();
         select = viewSelect;
         select.setShowCount(showCount);
 
-        // 每次搜索前将页码回调成1，避免List溢出
+
         cutPage.setNowPage(1);
-        // 设置搜索后的总页数
+
         cutPage.setTotalCount(tagService.getTagListByFuzzyName(viewSelect.getSelectMessage()).size());
-        // 更新要展示的list
+
         tagList = tagService.getTagListByFuzzyName(viewSelect.getSelectMessage());
 
         model.addAttribute("tagList", cutPage.getLimitList(tagList));
@@ -85,7 +85,7 @@ public class AdminTagController {
 
     @GetMapping("/nextPage")
     public String nextPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+
         if (cutPage.getNowPage() != cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getNowPage() + 1);
         }
@@ -98,7 +98,7 @@ public class AdminTagController {
 
     @GetMapping("/lastPage")
     public String lastPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+
         if(cutPage.getNowPage() != 1){
             cutPage.setNowPage(cutPage.getNowPage() - 1);
         }
@@ -110,7 +110,7 @@ public class AdminTagController {
 
     @GetMapping("/toWhichPage/{page}")
     public String toWhichPage(@PathVariable("page") Integer page, Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+
         if (page > cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getPageCount());
         } else {
@@ -146,7 +146,7 @@ public class AdminTagController {
     public String submitUpdate(Integer id, String newName){
         tagService.summitUpdate(id, newName);
 
-        return "修改成功!";
+        return "Succeed!";
     }
 
     @GetMapping("/addTag")
@@ -158,7 +158,7 @@ public class AdminTagController {
     @ResponseBody
     public String submitAdd(String newName){
         tagService.insertTag(newName);
-        return "增加成功!";
+        return "Succeed!";
     }
 
     @GetMapping("/deleteTag/{id}")
@@ -178,13 +178,13 @@ public class AdminTagController {
     @GetMapping("/errorDelete")
     @ResponseBody
     public String errorDelete(){
-        return "存在使用该标签的文章，禁止删除该标签！";
+        return "Do not delete the tag as there are articles associated with it.";
     }
 
     @GetMapping("/success")
     @ResponseBody
     public String success(){
-        return "删除成功！";
+        return "Succeed！";
     }
 
 }

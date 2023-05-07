@@ -34,33 +34,33 @@
 			<div class="blog-container">
 				<div class="blog-main">
 					<blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
-						<a href="userIndex.html" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
-						<a href="article.html" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
+						<a href="userIndex.html" title="网站首页">Home<span class="layui-box">&gt;</span></a>
+						<a href="article.html" title="文章专栏">Article<span class="layui-box">&gt;</span></a>
 					</blockquote>
 					<div class="blog-main" style="width: 1775px; height: 2000px">
 						<div id="parentArticleList" class="blog-main-left animated slideInLeft">
 							<div class="blog-module shadow" style="box-shadow: 0 1px 8px #a6a6a6;">
 								<fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0">
-									<legend>来说两句吧</legend>
+									<legend>Let's just say a few words</legend>
 									<div class="layui-field-box">
 										<div class="layui-form blog-editor" > <!--th:action="@{/submitTopic}" action="get"-->
-											<textarea type="text" id="title" name="title" placeholder="请输入标题" required="required" style="width: 1150px; font-size: 20px"></textarea><br>
+											<textarea type="text" id="title" name="title" placeholder="Please enter a title" required="required" style="width: 1150px; font-size: 20px"></textarea><br>
 											<div class="layui-input-inline" style="width: 200px">
 												<select name="topicTagId" id="topicTagId">
 													<option th:each="tag:${tagList}" name="topicTagId" th:value="${tag.id}" th:text="${tag.name}"></option>
 												</select>
 												<select name="topicType" id="topicType">
-													<option value="0">原创</option>
-													<option value="1">转载</option>
+													<option value="0">original</option>
+													<option value="1">carry</option>
 												</select>
 											</div>
 											<div class="layui-form-item">
-												<textarea required="required" id="content" name="content" class="layui-textarea" placeholder="请输入内容" style="height: 400px; font-size: 16px"></textarea>
+												<textarea required="required" id="content" name="content" class="layui-textarea" placeholder="Please enter content" style="height: 400px; font-size: 16px"></textarea>
 											</div>
 												<div class="layui-form-item ">
-													<button class="layui-btn" onclick="submitTopic()">发布</button>
+													<button class="layui-btn" onclick="submitTopic()">publish</button>
 												</div>
-											<button type="button" class="layui-btn layui-btn-danger" id="test7"><i class="layui-icon"></i>上传封面</button>
+											<button type="button" class="layui-btn layui-btn-danger" id="test7"><i class="layui-icon"></i>Upload Cover</button>
 										</div>
 									</div>
 								</fieldset>

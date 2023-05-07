@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class RandomCode {
 
-    // 获得随机的验证码
+    // Random captcha
     public static String getRandomCode(){
         StringBuffer data = new StringBuffer("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
         StringBuffer sb = new StringBuffer();

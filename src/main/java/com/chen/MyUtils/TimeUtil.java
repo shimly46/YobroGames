@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class TimeUtil {
 
-    /** 获取当前系统时间*/
+    /** Gets the current system time*/
     private long startTime;
 
-    /** 获取当前的系统时间，与初始时间相减就是程序运行的毫秒数，除以1000就是秒数*/
+    /** Get the current system time.Subtract the initial time and divide by 1000
+     * to get the number of milliseconds the program has been running*/
     private long endTime;
 
     public void start(){

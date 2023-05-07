@@ -14,7 +14,7 @@ public class Topic {
     private int id;
     private int topicUserId;
     private String title;
-    // 暂定内容存储方式
+    // Tentative content storage method
     private String content;
     private String topicPicture;
     private Date topicTime;

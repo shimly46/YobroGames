@@ -34,22 +34,22 @@ public class AdminCommentController {
 
     @GetMapping("/commentList")
     public String topicList(Model model){
-        // 分页信息
+        // page ins
         cutPage.setNowPage(1);
-        // 将展示数量恢复
+        // recover showing page
         cutPage.setEveryPageCount(CutPage.EVERYPAGECOUNT);
-        // 评论总量
+        // Comment quantity
         cutPage.setTotalCount(commentService.getTotalCommentCount());
 
-        // 搜索框为空
+        // Search null first
         select.setSelectMessage("");
-        // 将展示数量恢复
+        // recover showing page
         select.setShowCount(CutPage.EVERYPAGECOUNT);
-        // 分页展示判断
+        // paging justify
         commentList = commentService.getCommentList();
         model.addAttribute("commentList", cutPage.getLimitList(commentList));
 
-        // 更新要展示的list
+        // update list
         model.addAttribute("cutPage", cutPage);
         model.addAttribute("select", select);
 
@@ -57,18 +57,17 @@ public class AdminCommentController {
     }
 
     @GetMapping("/selectSubmit")
-    // selectMessage不为空，则是正常搜索，为空则是空搜索或者是nextPage重定向回来
+    // If selectMessage is not empty, it is a normal search; if it is empty, it is either an empty search or a nextPage redirect back
     public String selectSubmit(Select viewSelect, Model model){
-        // 直接select = viewSelect会将showCount归0
         int showCount = select.getShowCount();
         select = viewSelect;
         select.setShowCount(showCount);
 
-        // 每次搜索前将页码回调成1，避免List溢出
+        // The page number is called back to 1 before each search to avoid List overflow
         cutPage.setNowPage(1);
-        // 设置搜索后的总页数
+        // set the quantity of showing page
         cutPage.setTotalCount(commentService.getCommentByWhichCount(viewSelect));
-        // 更新要展示的list
+        // update list
         commentList = commentService.getCommentByWhich(viewSelect);
         //System.out.println(commentList.get(0));
         model.addAttribute("commentList", cutPage.getLimitList(commentList));
@@ -87,7 +86,8 @@ public class AdminCommentController {
 
     @GetMapping("/nextPage")
     public String nextPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // Here, cutPage is modified but there is no need to re-pass the session,
+        // the session is to take the address, real-time update, model is equal to request
         if (cutPage.getNowPage() != cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getNowPage() + 1);
         }
@@ -100,7 +100,7 @@ public class AdminCommentController {
 
     @GetMapping("/lastPage")
     public String lastPage(Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        //If selectMessage is not empty, it is a normal search; if it is empty, it is either an empty search or a nextPage redirect back
         if(cutPage.getNowPage() != 1){
             cutPage.setNowPage(cutPage.getNowPage() - 1);
         }
@@ -112,7 +112,8 @@ public class AdminCommentController {
 
     @GetMapping("/toWhichPage/{page}")
     public String toWhichPage(@PathVariable("page") Integer page, Model model){
-        // 这里修改了cutPage但是不用重新传入session，session是取地址，实时更新，model等于request
+        // Here, cutPage is modified but there is no need to re-pass the session,
+        // the session is to take the address, real-time update, model is equal to request
         if (page > cutPage.getPageCount()){
             cutPage.setNowPage(cutPage.getPageCount());
         } else {

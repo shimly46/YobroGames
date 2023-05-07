@@ -18,9 +18,9 @@ public class UploadService {
     @Value("${index.static.properties.topicPicture}")
     private String topicPicturePath;
 
-    public UploadResp upload(MultipartFile file, Boolean ifAvatar) { // 默认是头像，false为封面
+    public UploadResp upload(MultipartFile file, Boolean ifAvatar) { //The default is the avatar, and false is the cover
         if (file.isEmpty()) {
-            return new UploadResp("400", "文件为空");
+            return new UploadResp("400", "file null");
         }
         String originalFilename = file.getOriginalFilename();
         String fileName = System.currentTimeMillis() + "." + originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
@@ -42,8 +42,8 @@ public class UploadService {
             file.transferTo(dest);
         } catch (IOException e) {
             e.printStackTrace();
-            return new UploadResp("500", "上传失败！");
+            return new UploadResp("500", "submit failed！");
         }
-        return new UploadResp("200", "上传成功！", fileName);
+        return new UploadResp("200", "submit succeed！", fileName);
     }
 }

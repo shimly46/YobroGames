@@ -20,17 +20,17 @@
         <img src="/images/login.jpg" height="60px" class="userAvatar">
     </div>
     <div>
-        <div class="loginbox-title">登录</div>
+        <div class="loginbox-title">Sign in</div>
         <div class="loginbox-social">
-            <div class="social-title">系统</div>
+            <div class="social-title">Yobro</div>
         </div>
         <div class="layui-form-item input-item">
-            <label>用户名</label>
-            <input type="text" placeholder="请输入用户名" autocomplete="off" name="username" class="layui-input" lay-verify="required">
+            <label>username</label>
+            <input type="text" placeholder="enter a username" autocomplete="off" name="username" class="layui-input" lay-verify="required">
         </div>
         <div class="layui-form-item input-item">
-            <label>密码</label>
-            <input type="password" placeholder="请输入密码" autocomplete="off" name="password" class="layui-input" lay-verify="required">
+            <label>password</label>
+            <input type="password" placeholder="enter a password" autocomplete="off" name="password" class="layui-input" lay-verify="required">
         </div>
         <p th:text="${msg}" style="color: crimson"></p>
         <!--<div class="layui-form-item input-item" id="imgCode">
@@ -39,13 +39,13 @@
                  src="/verifyCode/getImg" onclick="javascript:changeImg()"><br>
         </div>-->
         <div class="layui-form-item">
-            <button class="layui-btn layui-block">登录</button>
+            <button class="layui-btn layui-block">Sign in</button>
         </div>
         <div class="layui-form-item">
-            <a class="layui-btn layui-block" th:href="@{/index.html}">游客访问</a>
+            <a class="layui-btn layui-block" th:href="@{/index.html}">Visits by tourists</a>
         </div>
         <div class="layui-form-item">
-            <a th:href="@{/register}">还没账户？点击注册</a>
+            <a th:href="@{/register}">Don't have an account yet? Click to register</a>
             <!--<a style="text-decoration:underline	;padding-left: 10px;color: #2badce" th:href="@{/}">回首页</a>-->
         </div>
     </div>

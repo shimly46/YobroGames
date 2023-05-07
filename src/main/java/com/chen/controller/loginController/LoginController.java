@@ -55,8 +55,8 @@ public class LoginController {
         }
     }
 
-    // 不知道为什么直接在checkLogin方法中存值msg然后重定向在前端用${}取不到值
-    // 这里登录失败后重定向到这个方法里存值然后跳转会去，就可以避免重定向取不到值
+    // Don't know why you just store msg in checkLogin method and redirect to the front end with ${} to get no value
+    // In this case, if the login fails, we redirect to this method to store the value and then jump to it, so we can avoid the redirect not getting the value
     @GetMapping("/loginFiled")
     public String loginFiled(Model model){
         model.addAttribute("msg", "用户名或密码错误！");
@@ -65,7 +65,7 @@ public class LoginController {
 
     @GetMapping("/register")
     public String toRegister(Model model){
-        // 传一个对象，避免在register中用${}取对象的值的时候空指针异常
+        // Pass an object to avoid null pointer exceptions in register when ${} is used to fetch the object's value
         model.addAttribute("registerUser", new RegisterUser());
         return "register";
     }

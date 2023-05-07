@@ -9,27 +9,27 @@ import org.springframework.stereotype.Component;
 //@Data
 public class MyStaticProperties {
 
-    public static String avatar; //头像的路径
+    public static String avatar; //头像 The path of the head
 
-    public static String topicPicture; //帖子封面的路径
+    public static String topicPicture; //帖子 The path of the topic
 
-    public static String otherPicture; //其他图片的路径
+    public static String otherPicture; //其他  The path of other pic
 
     public static String myEmail;
 
-    public static int tagCount; //分类导航的上的类别显示数量
+    public static int tagCount; // 分类导航的上的类别显示数量 The number of categories displayed on the category navigation
 
-    public static int everyPageTopicCount; //首页每页的topic数量
+    public static int everyPageTopicCount; //首页每页的topic数量 The number of topics per page of the home page
 
-    public static int topicRankCount; //topic热度排行的数量
+    public static int topicRankCount; //topic热度排行的数量 The number of hot topic rankings
 
-    public static int topicNearCount; //topic最新发布榜的数量
+    public static int topicNearCount; //topic最新发布榜的数量 The number of latest posts on topic
 
-    public static int hotUserCount; //热评用户榜的数量
+    public static int hotUserCount; //热评用户榜的数量 The number of hot user lists
 
-    public static int showFansCount; //空间里一页展示的粉丝数量
+    public static int showFansCount; //空间里一页展示的粉丝数量 The number of followers displayed on a page in the space
 
-    public static int showMessageCount; //展示信息的数量
+    public static int showMessageCount; //展示信息的数量 The amount of information presented
 
     public static int getShowMessageCount() {
         return showMessageCount;

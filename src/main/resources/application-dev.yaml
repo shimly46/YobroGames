@@ -1,4 +1,4 @@
-#修改classpath
+#correct classpath
 server:
   port: 8080
   servlet:
@@ -6,26 +6,26 @@ server:
 
 spring:
   mvc:
-    hiddenmethod:
+    hidden-method:
       filter:
-        enabled: true   #开启页面表单的Rest功能
+        enabled: true   #Enable Rest functionality for the page form
   datasource:
     username: root
-    password: qazchenxijie
-    url: jdbc:mysql://localhost:3306/myblog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    password: 123456
+    url: jdbc:mysql://localhost:3306/game?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource # 自定义数据源
-    hikari:
-      auto-commit: false
+#    type: com.alibaba.druid.pool.DruidDataSource # Custom data sources
+#    hikari:
+#      auto-commit: false
   servlet:
-    multipart:  #文件大小限制
+    multipart:  #File size limit
       max-file-size: 10MB
       max-request-size: 10MB
   mail:
     #username: 1345305701@qq.com
     #password: hnikomyarhtkicha
     #host: smtp.qq.com
-    # qq需要配置ssl
+    # qq needs ssl
     properties:
       mail:
         smtp:
@@ -41,24 +41,21 @@ mybatis:
     #下划线转驼峰
     map-underscore-to-camel-case: true
 
-# 日志
-#logging:
-  #level:
-    #com.chen.mapper: debug  # 包名根据自己的包名来
+
 
 index:
   static:
     properties:
-      myEmail: 1345305701@qq.com #我的邮箱
-      everyPageTopicCount: 5 # 首页每页的topic数量
-      topicRankCount: 10      # topic热度排行的数量
-      topicNearCount: 10      # topic最新发布榜的数量
-      hotUserCount: 5        # 热评用户榜的数量
-      showFansCount: 5     #一页展示的fans数量
-      showMessageCount: 5  #展示信息的数量
-      avatar: D:/github/layui/src/main/resources/static/images/avatar/  # 头像路径
-      topicPicture: D:/github/layui/src/main/resources/static/images/topicPicture/ #帖子封面路径
-      otherPicture:  #其他图片路径
+      myEmail: tang-h@ulster.ac.uk #email
+      everyPageTopicCount: 5 # topic quantity
+      topicRankCount: 10      # topic quantity
+      topicNearCount: 10      # topic latest rank
+      hotUserCount: 5        # pop topic quantity
+      showFansCount: 5     #per page fans
+      showMessageCount: 5  #ins quantity
+      avatar: D:/Program Files/JetBrains/IDEAPro/YobroGames/src/main/resources/static/images/avatar/  # img path
+      topicPicture: D:/Program Files/JetBrains/IDEAPro/YobroGames/src/main/resources/static/images/topicPicture/ #topic img path
+      otherPicture:  #route for other
       tagCount: 10
 
 

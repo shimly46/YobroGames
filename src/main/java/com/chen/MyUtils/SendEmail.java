@@ -16,10 +16,10 @@ public class SendEmail {
 
     @Getter
     @Setter
-    private Boolean already = Boolean.FALSE; //判断是否发送了
+    private Boolean already = Boolean.FALSE; //justify whether send it or not
 
 
-    //重载
+    //Reload again
     public void send(String setTo, String content) {
         send(setTo, MyStaticProperties.getMyEmail(), content);
     }
