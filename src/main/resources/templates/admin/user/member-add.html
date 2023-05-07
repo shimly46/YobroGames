@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="loginHtml">
     <head>
         <meta charset="UTF-8">
-        <title>欢迎页面-X-admin2.2</title>
+        <title>Welcome-X-admin2.2</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -14,7 +14,7 @@
     <body>
     <div class="x-nav">
           <span class="layui-breadcrumb">
-            <a th:href="@{/user/memberList}">返回</a>
+            <a th:href="@{/user/memberList}">back</a>
               </span>
     </div>
         <div class="layui-fluid" >
@@ -22,41 +22,41 @@
                 <form class="layui-form" id="myform">
                     <div class="layui-form-item">
                         <label for="L_username" class="layui-form-label">
-                            <span class="x-red">*</span>用户名</label>
+                            <span class="x-red">*</span>username</label>
                         <div class="layui-input-inline">
                             <input onblur="usernameCheck()" type="text" id="L_username" name="username" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
                             <span id="usernameInfo"></span>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_pass" class="layui-form-label">
-                            <span class="x-red">*</span>密码</label>
+                            <span class="x-red">*</span>password</label>
                         <div class="layui-input-inline">
                             <input onblur="passwordCheck()" type="password" id="L_pass" name="password" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
                         <span id="passwordInfo"></span>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">
-                            <span class="x-red">*</span>确认密码</label>
+                            <span class="x-red">*</span>repeated</label>
                         <div class="layui-input-inline">
                             <input onblur="rePasswordCheck()" type="password" id="L_repass" name="rePassword" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
                             <span id="rePasswordInfo"></span>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">性别</label>
+                        <label class="layui-form-label">gender</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="1" title="男" >
-                            <input type="radio" name="sex" value="0" title="女" >
+                            <input type="radio" name="sex" value="1" title="male" >
+                            <input type="radio" name="sex" value="0" title="female" >
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_email" class="layui-form-label">
-                            <span class="x-red">*</span>邮箱</label>
+                            <span class="x-red">*</span>email</label>
                         <div class="layui-input-inline">
                             <input onblur="emailCheck()" type="text" id="L_email" name="email" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
                         <span id="emailInfo"></span>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-submit="" onclick="add()">添加</button>
+                        <button class="layui-btn" lay-submit="" onclick="add()">add</button>
                     </div>
                 </form>
                 <!--<button class="layui-btn" onclick="add()">添加</button>-->
@@ -72,7 +72,7 @@
                     data:$('#myform').serialize(),
                     async: false,
                     error: function(request) {
-                        alert("添加失败!");
+                        alert("add failed!");
                     },
                     success: function(data) {
                         alert(data);

@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title text="博客文章专栏'"></title>
+    <title text="article'"></title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
     <!--Layui-->
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
@@ -34,14 +34,14 @@
     <div class="blog-container">
         <div class="blog-main">
             <blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
-                <a href="userIndex.html" title="网站首页">网站首页<span class="layui-box">&gt;</span></a>
-                <a href="article.html" title="文章专栏">文章专栏<span class="layui-box">&gt;</span></a>
+                <a href="userIndex.html" title="Homepage">Homepage<span class="layui-box">&gt;</span></a>
+                <a href="article.html" title="article">article<span class="layui-box">&gt;</span></a>
             </blockquote>
             <div class="blog-main">
                 <div id="parentArticleList" class="blog-main-left animated slideInLeft">
                     <div class="blog-module shadow" style="box-shadow: 0 1px 8px #a6a6a6;">
                         <fieldset class="layui-elem-field layui-field-title" style="margin-bottom:0" >
-                            <legend th:text="回复 + ${name}"></legend>
+                            <legend th:text="return + ${name}"></legend>
                             <div class="layui-field-box">
                                 <form class="layui-form blog-editor" th:action="@{/submitReply}" action="get"> <!--th:action="@{/submitTopic}" action="get"-->
                                     <div class="layui-input-inline" style="width: 100px">
@@ -50,10 +50,10 @@
                                     <input type="hidden" th:value="${comment.reply}" name="reply">
                                     <input type="hidden" th:value="${comment.commentTopicId}" name="commentTopicId">
                                     <div class="layui-form-item">
-                                        <textarea required="required" id="content" name="content" class="layui-textarea" placeholder="请输入内容" style="height: 500px"></textarea>
+                                        <textarea required="required" id="content" name="content" class="layui-textarea" placeholder="please input content" style="height: 500px"></textarea>
                                     </div>
                                     <div class="layui-form-item ">
-                                        <button type="submit" class="layui-btn" onclick="submitTopic()">回复</button>
+                                        <button type="submit" class="layui-btn" onclick="submitTopic()">return</button>
                                     </div>
                                 </form>
                             </div>
@@ -77,9 +77,9 @@
 
     function submitTopic(){
         if ($("#content").val().length < 1){
-            layer.msg("内容不能为空!")
+            layer.msg("NULL!")
         } else {
-            layer.msg("回复成功！")
+            layer.msg("return success！")
            /* $.ajax({
                 type : "get",
                 url: "/chen/submitTopic",

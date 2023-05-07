@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 //@Data
 public class MyStaticProperties {
 
-    public static String avatar; //头像 The path of the head
+    public static String avatar; // The path of the head
 
     public static String topicPicture; //帖子 The path of the topic
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="loginHtml">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎页面-X-admin2.2</title>
+    <title>Welcome-X-admin2.2</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -17,21 +17,21 @@
 <body>
 <div class="x-nav">
           <span class="layui-breadcrumb">
-            <a th:href="@{/tag/tagList}">返回</a>
+            <a th:href="@{/tag/tagList}">back</a>
               </span>
 </div>
 <div class="layui-fluid" >
     <div class="layui-row" >
             <div class="layui-form-item">
                 <label for="newName" class="layui-form-label">
-                    <span class="x-red">*</span>标签名</label>
+                    <span class="x-red">*</span>tag name</label>
                 <div class="layui-input-inline">
                     <input  type="text" id="newName" name="newName" required="required" autocomplete="off" class="layui-input">
                 </div>
                 <span id="usernameInfo"></span>
             </div>
             <div class="layui-form-item">
-                <button onclick="add()" type="submit" class="layui-btn" lay-submit="" >添加</button>
+                <button onclick="add()" type="submit" class="layui-btn" lay-submit="" >add</button>
             </div>
     </div>
 </div>

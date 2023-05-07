@@ -174,13 +174,13 @@
 					url: "/chen/topic/supportOrCriticism/" + topicId,
 					success: function (data){
 						if (data === "error"){
-							layer.msg("请先登录！")
+							layer.msg("sign in！")
 						} else {
 							location.href = "/chen/index/toWhichPage/" + [[${cutPage.nowPage}]];
 						}
 					},
 					error: function (){
-						alert("失败")
+						alert("Falied")
 					}
 				})
 			}
@@ -188,9 +188,9 @@
 			function toWhichPage() {
 				let pageCount = $("#pageCount").val();
 				if (pageCount === ""){
-					layer.msg("不能为空!")
+					layer.msg("Null!")
 				}else if(pageCount > [[${cutPage.pageCount}]] || pageCount <= 0){
-					layer.msg("无此页！")
+					layer.msg("none！")
 				}
 				else {
 					window.location.href="/chen/index/toWhichPage/" + $("#pageCount").val()

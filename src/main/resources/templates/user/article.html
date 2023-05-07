@@ -147,9 +147,9 @@
 		function toWhichPage() {
 			let pageCount = $("#pageCount").val();
 			if (pageCount === ""){
-				layer.msg("不能为空!")
+				layer.msg("Null!")
 			}else if(pageCount > [[${cutPage.pageCount}]] || pageCount <= 0){
-				layer.msg("无此页！")
+				layer.msg("No page！")
 			}
 			else {
 				window.location.href="/chen/article/toWhichPage/" + $("#pageCount").val()
@@ -164,14 +164,14 @@
 				},
 				success: function (data){
 					if (data === 'none'){
-						layer.msg("暂时还没有该类文章哦！");
+						layer.msg("No specific article！");
 					}
 					if (data === 'success'){
 						location.href="article.html";
 					}
 				},
 				error: function (){
-					layer.msg("失败")
+					layer.msg("Failed")
 				}
 			})
 		}

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="loginHtml">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎页面-X-admin2.2</title>
+    <title>Welcome-X-admin2.2</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="x-nav">
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" th:href="@{/tag/tagList}" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" th:href="@{/tag/tagList}" title="refresh">
         <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
 </div>
 <div class="layui-fluid">
@@ -23,7 +23,7 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5" type="post" th:action="@{/tag/selectSubmit}">
                         <div class="layui-inline layui-show-xs-block">
-                            <input th:value="${select.getSelectMessage()}" required="required" type="text" name="selectMessage"  placeholder="请输入搜索关键词" autocomplete="off" class="layui-input">
+                            <input th:value="${select.getSelectMessage()}" required="required" type="text" name="selectMessage"  placeholder="Search" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
                             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="layui-card-header">
                     <div class="layui-input-inline">
-                        展示数量:
+                        display:
                     </div>
                     <div class="layui-inline layui-show-xs-block">
                         <input th:value="${select.getShowCount()}" required="required" id="showCount" type="text" name="showCount"  placeholder="展示数目" autocomplete="off" class="layui-input" style="width: 100px">
@@ -46,10 +46,10 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>标签</th>
-                            <th>文章数量</th>
-                            <th>状态</th>
-                            <th>操作</th></tr>
+                            <th>tag</th>
+                            <th>count</th>
+                            <th>state</th>
+                            <th>operation</th></tr>
                         </thead>
                         <tbody>
                         <tr class="gradeX" th:each="tag:${tagList}">
@@ -57,15 +57,15 @@
                             <td th:text="${tag.name}"></td>
                             <td th:text="${tag.topicCount}"></td>
                             <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">on</span></td>
                             <td class="td-manage">
-                                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="on">
                                     <i class="layui-icon">&#xe601;</i>
                                 </a>
-                                <a title="编辑" th:href="@{/tag/toUpdate/} + ${tag.id}">
+                                <a title="edit" th:href="@{/tag/toUpdate/} + ${tag.id}">
                                     <i class="layui-icon">&#xe642;</i>
                                 </a>
-                                <button title="删除" th:onclick="deleteTag([[${tag.id}]])">
+                                <button title="delete" th:onclick="deleteTag([[${tag.id}]])">
                                     <i class="layui-icon">&#xe640;</i>
                                 </button>
                             </td>
@@ -81,14 +81,14 @@
                             <span class="current" th:text="${cutPage.nowPage}"></span>
                             <a class="num" th:href="@{/tag/toWhichPage/} + ${cutPage.nextPage}" th:text="${cutPage.nextPage}" th:if="${cutPage.nowPage != cutPage.getPageCount()}"></a>
                             <a class="next" th:href="@{/tag/nextPage}">&gt;&gt;</a>
-                            <a class="num" href="" th:text="共 + ${cutPage.pageCount} + 页"></a>
+                            <a class="num" href="" th:text="all + ${cutPage.pageCount} + page"></a>
                             <div class="layui-inline layui-show-xs-block">
-                                <input type="text" id="pageCount"  placeholder="页数" autocomplete="off" class="layui-input" style="width: 50px">
+                                <input type="text" id="pageCount"  placeholder="page" autocomplete="off" class="layui-input" style="width: 50px">
                             </div>
                             <div class="layui-inline layui-show-xs-block">
                                 <button class="layui-btn" onclick="toWhichPage()"><i class="layui-icon">&#xe615;</i></button>
                             </div>
-                            <a class="num" th:text="共 + ${cutPage.totalCount} + 条"></a>
+                            <a class="num" th:text="all + ${cutPage.totalCount} + s"></a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
     function toWhichPage() {
         let pageCount = $("#pageCount").val();
         if (pageCount === ""){
-            alert("不能为空!")
+            alert("Null!")
         }else {
             window.location.href="/chen/tag/toWhichPage/" + $("#pageCount").val()
         }
@@ -111,7 +111,7 @@
     function showCount(){
         let showCount = $("#showCount").val();
         if (showCount === ""){
-            alert("不能为空!")
+            alert("Null!")
         }else {
             window.location.href="/chen/tag/updateShowCount/" + showCount;
         }
@@ -125,7 +125,7 @@
                 location.href = "/chen/tag/tagList";
             },
             error: function (){
-                alert("失败!!")
+                alert("Failed!!")
             }
         })
     }
@@ -151,23 +151,23 @@
 
     /*用户-停用*/
     function member_stop(obj,id){
-        layer.confirm('确认要停用吗？',function(index){
+        layer.confirm('Are you sure？',function(index){
 
             if($(obj).attr('title')=='启用'){
 
                 //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
+                $(obj).attr('title','off')
                 $(obj).find('i').html('&#xe62f;');
 
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
+                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('off');
+                layer.msg('off!',{icon: 5,time:1000});
 
             }else{
-                $(obj).attr('title','启用')
+                $(obj).attr('title','on')
                 $(obj).find('i').html('&#xe601;');
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
+                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('on');
+                layer.msg('on!',{icon: 5,time:1000});
             }
 
         });

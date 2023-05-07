@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" class="loginHtml">
 <head>
     <meta charset="UTF-8">
-    <title>欢迎页面-X-admin2.2</title>
+    <title>Welcome-X-admin2.2</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -30,7 +30,7 @@
                         </div>
                         <div class="layui-input-inline">
                             <div class="layui-input-inline">
-                                选择查找:
+                                Search:
                             </div>
                             <div class="layui-input-inline" style="width: 100px">
                                 <!-- 选项数据动态添加 -->
@@ -51,7 +51,7 @@
                 </div>
                 <div class="layui-card-header">
                     <div class="layui-input-inline">
-                        展示数量:
+                        dispaly:
                     </div>
                     <div class="layui-inline layui-show-xs-block">
                         <input th:value="${select.getShowCount()}" id="showCount" required="required" type="text" name="showCount"  placeholder="展示数目" autocomplete="off" class="layui-input" style="width: 100px">
@@ -65,14 +65,14 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>标题</th>
-                            <th>作者</th>
-                            <th>点赞数</th>
-                            <th>评论数</th>
-                            <th>浏览量</th>
-                            <th>创建时间</th>
-                            <th>状态</th>
-                            <th>操作</th></tr>
+                            <th>title</th>
+                            <th>author</th>
+                            <th>appraise</th>
+                            <th>count</th>
+                            <th>time</th>
+                            <th>create time</th>
+                            <th>state</th>
+                            <th>operation</th></tr>
                         </thead>
                         <tbody>
                         <tr class="gradeX" th:each="topic:${topicList}">
@@ -85,12 +85,12 @@
                             <td th:text="${#dates.format(topic.topicTime, 'yyyy-MM-dd hh:mm')}"></td>
 
                             <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">on</span></td>
                             <td class="td-manage">
-                                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                <a onclick="member_stop(this,'10001')" href="javascript:;"  title="on">
                                     <i class="layui-icon">&#xe601;</i>
                                 </a>
-                                <a title="删除" th:href="@{/topic/deleteTopic/} + ${topic.id}" onclick="deleteTopic()">
+                                <a title="delete" th:href="@{/topic/deleteTopic/} + ${topic.id}" onclick="deleteTopic()">
                                     <i class="layui-icon">&#xe640;</i>
                                 </a>
                             </td>
@@ -107,14 +107,14 @@
                                 <span class="current" th:text="${cutPage.nowPage}"></span>
                                 <a class="num" th:href="@{/topic/toWhichPage/} + ${cutPage.nextPage}" th:text="${cutPage.nextPage}" th:if="${cutPage.nowPage != cutPage.getPageCount()}"></a>
                                 <a class="next" th:href="@{/topic/nextPage}">&gt;&gt;</a>
-                                <a class="num" th:text="共 + ${cutPage.pageCount} + 页"></a>
+                                <a class="num" th:text="all + ${cutPage.pageCount} + pages"></a>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" id="pageCount"  placeholder="页数  " autocomplete="off" class="layui-input" style="width: 50px">
+                                    <input type="text" id="pageCount"  placeholder="pages  " autocomplete="off" class="layui-input" style="width: 50px">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn" onclick="toWhichPage()"><i class="layui-icon">&#xe615;</i></button>
                                 </div>
-                                <a class="num" th:text="共 + ${cutPage.totalCount} + 条"></a>
+                                <a class="num" th:text="all + ${cutPage.totalCount} + count"></a>
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
     function toWhichPage() {
         let pageCount = $("#pageCount").val();
         if (pageCount === ""){
-            alert("不能为空!")
+            alert("NULL!")
         }else {
             window.location.href="/chen/user/toWhichPage/" + $("#pageCount").val()
         }
@@ -141,14 +141,14 @@
     function showCount(){
         let showCount = $("#showCount").val();
         if (showCount === ""){
-            alert("不能为空!")
+            alert("NULL!")
         }else {
             window.location.href="/chen/topic/updateShowCount/" + showCount;
         }
     }
 
     function deleteTopic(){
-        alert("删除成功！")
+        alert("Delete Success！")
     }
 
     layui.use(['laydate','form'], function(){
@@ -171,23 +171,23 @@
 
     /*用户-停用*/
     function member_stop(obj,id){
-        layer.confirm('确认要停用吗？',function(index){
+        layer.confirm('Are you sure？',function(index){
 
-            if($(obj).attr('title')=='启用'){
+            if($(obj).attr('title')=='on'){
 
                 //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
+                $(obj).attr('title','off')
                 $(obj).find('i').html('&#xe62f;');
 
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
+                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('off');
+                layer.msg('off!',{icon: 5,time:1000});
 
             }else{
-                $(obj).attr('title','启用')
+                $(obj).attr('title','on')
                 $(obj).find('i').html('&#xe601;');
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
+                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('on');
+                layer.msg('on!',{icon: 5,time:1000});
             }
 
         });

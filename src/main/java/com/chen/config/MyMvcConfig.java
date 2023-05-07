@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// 扩展配置类 Extending Configuration classes
+//  Extending Configuration classes
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
 

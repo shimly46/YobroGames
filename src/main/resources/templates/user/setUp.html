@@ -24,11 +24,11 @@
     <div class="blog-container">
         <div class="blog-main">
 
-            <div class="home-tips shadow">设置</div>
+            <div class="home-tips shadow">Settings</div>
             <!--设置主页面-->
             <div class="blog-main-left animated slideInLeft" style="background: white; width: 1170px" th:if="${message == 'all'}">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-                    基本信息
+                    Profile
                 </fieldset>
                 <div class="hotusers-avator">
                     <img th:src="@{/images/avatar/} + ${session.loginUser.avatar}" width="45" height="45">
@@ -36,62 +36,62 @@
                 </div>
                 <form class="layui-form" method="get" th:action="@{/submitSetUp}" lay-filter="example">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">用户名</label>
+                        <label class="layui-form-label">Username</label>
                         <div class="layui-input-block">
                             <input th:value="${session.loginUser.username}" onblur="usernameCheck()" type="text" name="username" id="L_username" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input" style="width: 180px">
                             <span id="usernameInfo"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">密码</label>
+                        <label class="layui-form-label">Password</label>
                         <div class="layui-input-block">
                             <input th:value="@{*******}" type="text" name="password" readonly=“readonly” class="layui-input" style="width: 180px">
-                            <a th:href="@{/updatePassword}" style="color: #1abc9c">修改密码</a>
+                            <a th:href="@{/updatePassword}" style="color: #1abc9c">Correct psw</a>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">邮箱</label>
+                        <label class="layui-form-label">email</label>
                         <div class="layui-input-block">
                             <input th:value="${session.loginUser.email}" readonly=“readonly” type="text" name="email" class="layui-input" style="width: 180px"></input>
-                                <a th:href="@{/checkEmail}" style="color: #1abc9c">修改邮箱</a>
+                                <a th:href="@{/checkEmail}" style="color: #1abc9c">correct email</a>
                         </div>
                     </div>
                     <div class="layui-form-item" th:if="${session.loginUser.secret == 1}">
-                        <label class="layui-form-label">隐私保护</label>
+                        <label class="layui-form-label">privacy</label>
                         <div class="layui-input-block">
                             <input type="checkbox" name="secret" value="1" lay-skin="switch" lay-text="ON|OFF" checked="">
                         </div>
                     </div>
                     <div class="layui-form-item" th:if="${session.loginUser.secret == 0}">
-                        <label class="layui-form-label">隐私保护</label>
+                        <label class="layui-form-label">privacy</label>
                         <div class="layui-input-block">
                             <input type="checkbox" name="secret" value="0" lay-skin="switch" lay-text="ON|OFF">
                         </div>
                     </div>
                     <div class="layui-form-item" th:if="${session.loginUser.sex == 1}">
-                        <label class="layui-form-label">性别</label>
+                        <label class="layui-form-label">gender</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="1" title="男" checked="">
-                            <input type="radio" name="sex" value="0" title="女">
+                            <input type="radio" name="sex" value="1" title="male" checked="">
+                            <input type="radio" name="sex" value="0" title="female">
                         </div>
                     </div>
                     <div class="layui-form-item" th:if="${session.loginUser.sex == 0}">
-                        <label class="layui-form-label">性别</label>
+                        <label class="layui-form-label">gender</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="sex" value="1" title="男">
-                            <input type="radio" name="sex" value="0" title="女" checked="">
+                            <input type="radio" name="sex" value="1" title="male">
+                            <input type="radio" name="sex" value="0" title="female" checked="">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
-                        <label class="layui-form-label">个性签名</label>
+                        <label class="layui-form-label">personalized signature</label>
                         <div class="layui-input-block" style="width: 400px">
-                            <textarea placeholder="请输入内容" class="layui-textarea" name="introduction" th:text="${session.loginUser.introduction}"></textarea>
+                            <textarea placeholder="Please input the content" class="layui-textarea" name="introduction" th:text="${session.loginUser.introduction}"></textarea>
                         </div>
                     </div>
 
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button type="submit" class="layui-btn">立即提交</button>
+                            <button type="submit" class="layui-btn">submit</button>
                         </div>
                     </div>
 
@@ -108,35 +108,35 @@
                 </div>
                 <div class="layui-form" method="get" lay-filter="example">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">邮箱</label>
+                        <label class="layui-form-label">email</label>
                         <div class="layui-input-block">
                             <input th:value="${session.loginUser.email}" readonly="readonly" type="text" name="email" class="layui-input" style="width: 180px">
-                            <button class="layui-btn layui-btn-sm" onclick="sendCode()">发送验证码</button>
+                            <button class="layui-btn layui-btn-sm" onclick="sendCode()">send code</button>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">密码</label>
+                        <label class="layui-form-label">password</label>
                         <div class="layui-input-block">
-                            <input type="password" onblur="passwordCheck()" onKeyUp="value=value.replace(/[\W]/g,'')" name="password" id="L_pass" placeholder="只能输入数字和字母" class="layui-input" style="width: 180px">
+                            <input type="password" onblur="passwordCheck()" onKeyUp="value=value.replace(/[\W]/g,'')" name="password" id="L_pass" placeholder="numerric and alphabet" class="layui-input" style="width: 180px">
                             <span id="passwordInfo"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">密码</label>
+                        <label class="layui-form-label">password</label>
                         <div class="layui-input-block">
-                            <input type="password" onblur="rePasswordCheck()" onKeyUp="value=value.replace(/[\W]/g,'')" name="againPassword" id="L_repass" placeholder="再次输入新密码" class="layui-input" style="width: 180px">
+                            <input type="password" onblur="rePasswordCheck()" onKeyUp="value=value.replace(/[\W]/g,'')" name="againPassword" id="L_repass" placeholder="Repeated" class="layui-input" style="width: 180px">
                             <span id="rePasswordInfo"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">验证码</label>
+                        <label class="layui-form-label">captcha</label>
                         <div class="layui-input-block">
                             <input type="text" name="code" id="code" class="layui-input" style="width: 180px">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" onclick="submitPasswordUpdate()">立刻修改</button>
+                            <button class="layui-btn" onclick="submitPasswordUpdate()">correct ergenently</button>
                         </div>
                     </div>
 
@@ -153,21 +153,21 @@
                 </div>
                 <div class="layui-form" method="get" lay-filter="example">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">邮箱</label>
+                        <label class="layui-form-label">email/label>
                         <div class="layui-input-block">
                             <input th:value="${session.loginUser.email}" readonly="readonly" type="text" name="email" class="layui-input" style="width: 180px">
-                            <button class="layui-btn layui-btn-sm" onclick="sendCode()">发送验证码</button>
+                            <button class="layui-btn layui-btn-sm" onclick="sendCode()">send code</button>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">验证码</label>
+                        <label class="layui-form-label">captcha</label>
                         <div class="layui-input-block">
                             <input type="text" name="code" id="checkEmailCode" class="layui-input" style="width: 180px">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" onclick="checkEmailCode()">提交</button>
+                            <button class="layui-btn" onclick="checkEmailCode()">submit</button>
                         </div>
                     </div>
                 </div>
@@ -183,22 +183,22 @@
                 </div>
                 <div class="layui-form" method="get" lay-filter="example">
                     <div class="layui-form-item">
-                        <label class="layui-form-label">新邮箱</label>
+                        <label class="layui-form-label">new email</label>
                         <div class="layui-input-block">
                             <input type="text" name="email" id="L_email" onblur="emailCheck()" class="layui-input" style="width: 180px">
-                            <button class="layui-btn layui-btn-sm" onclick="sendCodeAndCarryNewEmail()">发送验证码</button>
+                            <button class="layui-btn layui-btn-sm" onclick="sendCodeAndCarryNewEmail()">send code</button>
                             <span id="emailInfo"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">验证码</label>
+                        <label class="layui-form-label">captcha/label>
                         <div class="layui-input-block">
                             <input type="text" required="required" name="code" id="updateEmailCode" class="layui-input" style="width: 180px">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" onclick="submitUpdateEmail()">提交更改</button>
+                            <button class="layui-btn" onclick="submitUpdateEmail()">update</button>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
             ,url: '/chen/uploadAvatar' //此处配置你自己的上传接口即可
             ,size: 6000 //限制文件大小，单位 KB
             ,done: function(res){
-                layer.msg('上传成功');
+                layer.msg('upload success');
             }
         });
     });
@@ -247,7 +247,7 @@
                 layer.msg(data)
             },
             error:function (){
-                layer.msg("发送失败")
+                layer.msg("send failed")
             }
         })
         return false;	//禁止提交表单
@@ -266,7 +266,7 @@
                 layer.msg(data)
             },
             error:function (){
-                layer.msg("失败")
+                layer.msg("failed")
             }
         })
         return false;	//禁止提交表单
@@ -288,7 +288,7 @@
                 }
             },
             error:function (){
-                layer.msg("提交失败")
+                layer.msg("submit failed")
             }
         })
     }
@@ -304,7 +304,7 @@
                 layer.msg(data)
             },
             error:function (){
-                layer.msg("发送失败")
+                layer.msg("send failed")
             }
         })
     }
@@ -321,7 +321,7 @@
                 layer.msg(data)
             },
             error:function (){
-                layer.msg("更改失败！")
+                layer.msg("update failed！")
             }
         })
     }

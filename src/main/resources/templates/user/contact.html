@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
     <meta http-equiv="Content-Language" content="zh-CN" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title text="博客文章专栏'"></title>
+    <title text="article'"></title>
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
     <!--Layui-->
     <link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
@@ -68,7 +68,7 @@
 
     function submitBug(){
         if ($("#content").val().length < 1){
-            layer.msg("内容不能为空!")
+            layer.msg("Null!")
         } else {
             $.ajax({
                 type : "GET",
@@ -77,7 +77,7 @@
                     "content":$("#content").val(),
                 },
                 success:function () {
-                    layer.msg("谢谢你的反馈！")
+                    layer.msg("thanks for your feedback！")
                 }
             })
         }

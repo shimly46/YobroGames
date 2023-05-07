@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
 		<meta http-equiv="Content-Language" content="zh-CN" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<title text="博客文章专栏'"></title>
+		<title text="Article'"></title>
 		<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
 		<!--Layui-->
 		<link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
@@ -34,8 +34,8 @@
 			<div class="blog-container">
 				<div class="blog-main">
 					<blockquote class="layui-elem-quote sitemap layui-breadcrumb shadow" style="visibility: visible;">
-						<a href="userIndex.html" title="网站首页">Home<span class="layui-box">&gt;</span></a>
-						<a href="article.html" title="文章专栏">Article<span class="layui-box">&gt;</span></a>
+						<a href="userIndex.html" title="homepage">Home<span class="layui-box">&gt;</span></a>
+						<a href="article.html" title="article">Article<span class="layui-box">&gt;</span></a>
 					</blockquote>
 					<div class="blog-main" style="width: 1775px; height: 2000px">
 						<div id="parentArticleList" class="blog-main-left animated slideInLeft">
@@ -100,10 +100,10 @@
 
 			function submitTopic(){
 				if([[${session.loginUser}]] == null){
-					layer.msg("请先登录")
+					layer.msg("sign up first")
 				}else{
 					if ($("#content").val().length < 30){
-						layer.msg("内容不能少于30字！")
+						layer.msg("at least 30 characters！")
 					} else {
 						$.ajax({
 							type : "get",

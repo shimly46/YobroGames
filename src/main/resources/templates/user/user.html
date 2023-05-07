@@ -74,14 +74,14 @@
             },
             success: function (data){
                 if (data === 'none'){
-                    layer.msg("没有相关用户哦！");
+                    layer.msg("none User！");
                 }
                 if (data === 'success'){
                     location.href="user.html";
                 }
             },
             error: function (){
-                layer.msg("失败")
+                layer.msg("Failed")
             }
         })
     }

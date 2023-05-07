@@ -20,36 +20,35 @@
         <img src="/images/login.jpg" height="60px" class="userAvatar">
     </div>
     <div>
-        <div class="loginbox-title">注册</div>
+        <div class="loginbox-title">sign up</div>
 
         <div class="layui-form-item input-item">
-            <label>用户名</label>
-            <input th:value="${registerUser.username}" id="username" required="required" type="text" placeholder="请输入用户名" autocomplete="off" name="username" class="layui-input" lay-verify="required">
+            <label>username</label>
+            <input th:value="${registerUser.username}" id="username" required="required" type="text" placeholder="Please input username" autocomplete="off" name="username" class="layui-input" lay-verify="required">
         </div>
         <div class="layui-form-item input-item">
-            <label>密码</label>
-            <input th:value="${registerUser.password}" id="password" required="required" type="password" placeholder="请输入密码" autocomplete="off" name="password" class="layui-input" lay-verify="required">
+            <label>password</label>
+            <input th:value="${registerUser.password}" id="password" required="required" type="password" placeholder="Please input password" autocomplete="off" name="password" class="layui-input" lay-verify="required">
         </div>
         <div class="layui-form-item input-item">
-            <label>确认密码</label>
-            <input th:value="${registerUser.againPassword}" id="againPassword" required="required" type="password" placeholder="再次输入密码" autocomplete="off" name="againPassword" class="layui-input" lay-verify="required">
+            <label>repeated</label>
+            <input th:value="${registerUser.againPassword}" id="againPassword" required="required" type="password" placeholder="repeated" autocomplete="off" name="againPassword" class="layui-input" lay-verify="required">
         </div>
         <div class="layui-form-item input-item">
-            <label>邮箱</label>
-            <input th:value="${registerUser.email}" id="email" required="required" type="email" placeholder="请输入邮箱" autocomplete="off" name="email" class="layui-input" lay-verify="required">
+            <label>email</label>
+            <input th:value="${registerUser.email}" id="email" required="required" type="email" placeholder="Please input email" autocomplete="off" name="email" class="layui-input" lay-verify="required">
         </div>
         <div>
-            <button class="layui-btn layui-btn-sm" onclick="sendCode()">发送验证码</button>
+            <button class="layui-btn layui-btn-sm" onclick="sendCode()">send code</button>
         </div>
         <div class="layui-form-item input-item">
-            <label>验证码</label>
-            <input th:value="${registerUser.code}" id="code" type="text" required="required" placeholder="请输入验证码" autocomplete="off" name="code" class="layui-input">
+            <label>Captcha</label>
+            <input th:value="${registerUser.code}" id="code" type="text" required="required" placeholder="Please input code" autocomplete="off" name="code" class="layui-input">
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn layui-block" onclick="submit()">注册</button>
+            <button class="layui-btn layui-block" onclick="submit()">sign up</button>
         </div>
-        <a th:href="@{/}" style="color: #1abc9c">返回</a>
-    </div>
+        <a th:href="@{/}" style="color: #1abc9c">return
 </div>
 
 </body>
@@ -85,7 +84,7 @@
             success:function (data){
                 layer.msg(data)
                 if(data === 'success'){
-                    alert("注册成功！")
+                    alert("Success！")
                     location.href="/chen"
                 }
             },

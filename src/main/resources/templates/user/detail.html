@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; Charset=utf-8" />
 		<meta http-equiv="Content-Language" content="zh-CN" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<title text="博客文章专栏'"></title>
+		<title text="article'"></title>
 		<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
 		<!--Layui-->
 		<link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
@@ -158,7 +158,7 @@
 					url: "/chen/topic/supportOrCriticism/" + message,
 					success: function (data){
 						if (data === "error"){
-							layer.msg("请先登录！")
+							layer.msg("sign up first！")
 						} else {
 							if (flag === 1){
 								if (data >= count){
@@ -180,7 +180,7 @@
 						}
 					},
 					error: function (){
-						alert("失败")
+						alert("failed")
 					}
 				})
 			}
@@ -190,13 +190,13 @@
 					url: "/chen/comment/supportOrCriticism/" + [[${topic.id}]] + '/' + commentId,
 					success: function (data){
 						if (data === "error"){
-							layer.msg("请先登录！")
+							layer.msg("sign up first！")
 						} else {
 							location.href = "/chen/detail/" + [[${topic.id}]];
 						}
 					},
 					error: function (){
-						alert("失败")
+						alert("failed")
 					}
 				})
 			}
