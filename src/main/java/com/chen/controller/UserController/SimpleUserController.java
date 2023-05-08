@@ -64,7 +64,7 @@ public class SimpleUserController {
     public String userIndex(Model model, HttpSession session, HttpServletRequest req){
 
 
-        /*TimeZone time = TimeZone.getTimeZone("Etc/GMT-8");  //转换为中国时区
+        /*TimeZone time = TimeZone.getTimeZone("Etc/GMT-8");
         TimeZone.setDefault(time);*/
 
         ipService.addIp(GetIp.getIpAddress(req), new Date());

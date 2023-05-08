@@ -122,7 +122,7 @@
         <result property="topicPicture" column="topic_picture"></result>
         <result property="topicTime" column="topic_time"></result>
         <result property="supportCount" column="support_count"></result>
-        <result property="CriticismCount" column="Criticism_count"></result>
+        <result property="criticismCount" column="Criticism_count"></result>
         <result property="commentCount" column="comment_count"></result>
         <result property="browseCount" column="browse_count"></result>
         <result property="topicTagId" column="topic_tag_id"></result>
